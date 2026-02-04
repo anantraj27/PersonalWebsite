@@ -203,7 +203,7 @@ passport.use('local', new Strategy(
 passport.use("google", new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: "https://personalwebsite-uiqc.onrender.com/auth/google/secret",
+  callbackURL: "https://personalwebsite-1-9nzz.onrender.com/auth/google/secret",
   userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
 
 }, async (accessToken, refreshToken, profile, cb) => {
