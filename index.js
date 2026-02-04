@@ -1,6 +1,8 @@
 import express from "express";
 import bodyParser from "body-parser";
-import pg from "pg";
+import pkg from "pg";
+const { Pool } = pkg;
+
 import path from "path";
 import bcrypt from "bcrypt"
 import session from "express-session"
@@ -193,13 +195,13 @@ passport.use('local', new Strategy(
 
   })))
 
-console.log("ID:", process.env.GOOGLE_CLIENT_ID);
-console.log("SECRET:", process.env.GOOGLE_CLIENT_SECRET);
+// console.log("ID:", process.env.GOOGLE_CLIENT_ID);
+// console.log("SECRET:", process.env.GOOGLE_CLIENT_SECRET);
 
 passport.use("google", new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: "https://personalwebsite-uiqc.onrender.com/secret",
+  callbackURL: "https://personalwebsite-uiqc.onrender.com/auth/google/secret",
   userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
 
 }, async (accessToken, refreshToken, profile, cb) => {
@@ -230,5 +232,5 @@ passport.deserializeUser((user, cb) => {
 })
 
 app.listen(port, () => {
-  console.log(`app is listining on ${port} port `)
+  // console.log(`app is listining on ${port} port `)
 })
