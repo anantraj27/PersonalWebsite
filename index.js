@@ -40,7 +40,7 @@ const dir_name = dirname(fileURLToPath(import.meta.url))
 
 app.use(session(
   {
-    secret: process.env.SESSION_SECRETE,
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
     cookie: {
