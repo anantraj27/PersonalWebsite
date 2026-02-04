@@ -1,0 +1,112 @@
+ p {
+     width: 90vh;
+ }
+
+ .form_space {
+     margin-bottom: 10px;
+
+ }
+
+ form {
+     width: 350px;
+     margin-top: 30vh;
+ }
+
+ body {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
+
+ }
+
+ .username {
+     background-image: url('user.svg');
+     width: 350px;
+
+     background-position: calc(100% - 3px) center;
+     background-color: black;
+     background-repeat: no-repeat;
+     background-size: 1.5rem;
+     border-color: white;
+     border-radius: 12px;
+     padding: 10px;
+
+ }
+
+ .userEmail {
+     width: 350px;
+     background-position: calc(100% - 3px) center;
+     background-color: black;
+     background-repeat: no-repeat;
+     background-size: contain;
+     border-color: white;
+     border-radius: 12px;
+     padding: 10px;
+
+ }
+
+ .userPassword {
+     width: 350px;
+     background-image: url('password.svg');
+     background-position: calc(100% - 3px) center;
+     background-color: black;
+     background-repeat: no-repeat;
+     background-size: 1.5rem;
+     border-color: white;
+     border-radius: 12px;
+     padding: 10px;
+
+ }
+
+ #submit {
+     padding: 5px;
+     border-radius: 12px;
+
+
+ }
+
+ #submit:hover {
+     background-color: red;
+ }
+
+
+ div {
+     width: 370px;
+     display: block;
+ }
+
+ .google {
+     margin-top: 10px;
+     width: 373px;
+     padding: 10px;
+     background-color:white;
+     background-image: url("https://static.dezeen.com/uploads/2025/05/sq-google-g-logo-update_dezeen_2364_col_0.jpg");
+     background-size: 40px;
+     background-repeat: no-repeat;
+     border-radius: 12px;
+     background-position: calc();
+       color: black;
+       font-size: medium;
+ }
+ .verification{
+     margin-top: 10px;
+     width: 373px;
+     padding: 10px;
+     background-color:green;
+      border-radius: 12px;
+     background-position: calc();
+       color: black;
+      font-size: larger;
+ }
+
+ body {
+     background-color: black;
+     color: white;
+ }
+ input{
+    color: white;
+ }
+ p{
+    color: white;
+ }
