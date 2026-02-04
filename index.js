@@ -73,6 +73,13 @@ const db =new pg.Client({
   ssl: { rejectUnauthorized: false }
 });
 db.connect();
+db.on("connect", () => {
+  console.log("Connected to database");
+});
+
+db.on("error", (err) => {
+  console.error("DB ERROR:", err);
+});
 
 
 // console.log(dir_name + "/public/index.html")
