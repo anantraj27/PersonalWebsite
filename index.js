@@ -70,10 +70,12 @@ app.use((req, res, next) => {
 //   user: "postgres"
 // });
 // db.connect();
-const db =new pg.Pool({
+const db = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false }
 });
+
+
 // db.connect();
 db.on("connect", () => {
   console.log("Connected to database");
