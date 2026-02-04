@@ -60,12 +60,17 @@ app.use((req, res, next) => {
   next();
 });
 
-const db = new pg.Client({
-  port: 5236,
-  password: "AnAnT27",
-  database: "LOGIN",
-  host: "localhost",
-  user: "postgres"
+// const db = new pg.Client({
+//   port: 5236,
+//   password: "AnAnT27",
+//   database: "LOGIN",
+//   host: "localhost",
+//   user: "postgres"
+// });
+// db.connect();
+const db =new pg.Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: { rejectUnauthorized: false }
 });
 db.connect();
 
