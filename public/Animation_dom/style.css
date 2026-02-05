@@ -74,7 +74,7 @@ p>span {
 }
 
 footer {
-  margin-top: 10vh;
+  
 
   left: 0;
   /* width: 100%; */
@@ -115,8 +115,8 @@ footer {
 .timeline {
 
   margin-top: 50px;
- min-height: 100vh;
-  margin: auto;
+ min-height: 95vh;
+ margin: auto;
 }
 
 
@@ -139,7 +139,7 @@ footer {
 
   position: relative;
   width: 2px;
-  height: 400px;
+
   margin: auto;
   background: #ffe9a3;
   /* filter: bright(7); */
@@ -159,8 +159,9 @@ footer {
 .bottom {
   border-radius: 12px;
   display: flex;
-  width: 200px;
-  height: 100px;
+   width: clamp(200px,90%,320px);
+  min-height: 100px;
+  padding: 20px;
   align-items: center;
   justify-content: center;
   margin: auto;
@@ -172,8 +173,9 @@ footer {
   top: 125px;
   left: 56.6vw;
   display: flex;
-  width: 200px;
-  height: 100px;
+  width: clamp(200px,90%,320px);
+  min-height: 100px;
+  padding: 20px;
   align-items: center;
   justify-content: center;
   margin: auto;
@@ -199,8 +201,9 @@ footer {
   top: 350px;
   left: 56.6vw;
   display: flex;
-  width: 200px;
-  height: 100px;
+   width: clamp(200px,90%,320px);
+  min-height: 100px;
+  padding: 20px;
   align-items: center;
   justify-content: center;
   margin: auto;
@@ -224,8 +227,9 @@ font-family: sans-serif;
   top: 250px;
   right: 56.7vw;
   display: flex;
-  width: 200px;
-  height: 100px;
+   width: clamp(200px,90%,320px);
+  min-height: 100px;
+  padding: 20px;
   align-items: center;
   justify-content: center;
   margin: auto;
