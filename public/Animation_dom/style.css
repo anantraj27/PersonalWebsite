@@ -11,7 +11,6 @@
 } */
 *{
   margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 .ball {
@@ -74,7 +73,7 @@ p>span {
 }
 
 footer {
-  
+  margin-top: 10vh;
 
   left: 0;
   /* width: 100%; */
@@ -115,8 +114,9 @@ footer {
 .timeline {
 
   margin-top: 50px;
- min-height: 95vh;
- margin: auto;
+  min-height: 95vh;
+  width: 70vw;
+  margin: auto;
 }
 
 
@@ -139,7 +139,7 @@ footer {
 
   position: relative;
   width: 2px;
-
+  height: 400px;
   margin: auto;
   background: #ffe9a3;
   /* filter: bright(7); */
@@ -159,9 +159,9 @@ footer {
 .bottom {
   border-radius: 12px;
   display: flex;
-   width: clamp(200px,90%,320px);
-  min-height: 100px;
-  padding: 20px;
+  width: 35%;
+  /* height: 100px; */
+  aspect-ratio: 3/2;
   align-items: center;
   justify-content: center;
   margin: auto;
@@ -173,9 +173,9 @@ footer {
   top: 125px;
   left: 56.6vw;
   display: flex;
-  width: clamp(200px,90%,320px);
-  min-height: 100px;
-  padding: 20px;
+  width: 35%;
+  /* height: 100px; */
+  aspect-ratio: 3/2;
   align-items: center;
   justify-content: center;
   margin: auto;
@@ -188,7 +188,7 @@ footer {
 
   position: absolute;
   top: 175px;
-  left: 50vw;
+  left: 16%;
   border: solid white 0.5px;
   z-index: 0;
   width: 6.5vw;
@@ -201,9 +201,9 @@ footer {
   top: 350px;
   left: 56.6vw;
   display: flex;
-   width: clamp(200px,90%,320px);
-  min-height: 100px;
-  padding: 20px;
+  width: 35%px;
+  /* height: 100px; */
+  aspect-ratio: 3/2;
   align-items: center;
   justify-content: center;
   margin: auto;
@@ -213,7 +213,7 @@ footer {
 .third-line {
   position: absolute;
   top: 400px;
-  left: 50vw;
+  left: 16%;
   border: solid white 0.5px;
   z-index: 0;
   width: 6.5vw;
@@ -227,9 +227,9 @@ font-family: sans-serif;
   top: 250px;
   right: 56.7vw;
   display: flex;
-   width: clamp(200px,90%,320px);
-  min-height: 100px;
-  padding: 20px;
+  width: 35%;
+  /* height: 100px; */
+  aspect-ratio: 3/2;
   align-items: center;
   justify-content: center;
   margin: auto;
@@ -240,7 +240,7 @@ font-family: sans-serif;
 .fourth-line {
   position: absolute;
   top: 300px;
-  left: 43.3vw;
+  left: 16%;
   border: solid white 0.5px;
   z-index: 0;
   width: 6.5vw;
