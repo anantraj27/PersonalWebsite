@@ -234,5 +234,5 @@ passport.deserializeUser((user, cb) => {
 })
 
 app.listen(port, () => {
-  // console.log(`app is listining on ${port} port `)
+   console.log(`app is listining on ${port} port `)
 })
