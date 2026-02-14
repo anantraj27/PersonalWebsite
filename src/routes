@@ -1,0 +1,81 @@
+import express from "express";
+import passport from "passport";
+import bcrypt from "bcrypt";
+import { dirname } from "path";
+import path from "path";
+import { fileURLToPath } from "url";
+const router = express.Router();
+const dir_name = dirname(fileURLToPath(import.meta.url))
+// SECRET
+const saltRound = 10;
+router.get("/secret", (req, res) => {
+  if (req.isAuthenticated()) {
+    res.sendFile(path.join(dir_name, '../public/Animation_dom/index.html'));
+  } else {
+    res.redirect("/signin");
+  }
+});
+
+// HOME
+router.get("/", (req, res) => {
+  res.sendFile(path.join(dir_name, '../public/first.html'));
+});
+
+// SIGNIN PAGE
+router.get("/signin", (req, res) => {
+  res.sendFile(path.join(dir_name, '../public/signin.html'));
+});
+
+// SIGNUP PAGE
+router.get("/signup", (req, res) => {
+  res.sendFile(path.join(dir_name, '../public/signup.html'));
+});
+
+// GOOGLE AUTH
+router.get("/auth/google",
+  passport.authenticate("google", {
+    scope: ["profile", "email"]
+  })
+);
+
+router.get("/auth/google/secret",
+  passport.authenticate("google", {
+    successRedirect: "/secret",
+    failureRedirect: "/signin"
+  })
+);
+
+// LOGIN
+router.post("/signin",
+  passport.authenticate("local", {
+    successRedirect: "/secret",
+    failureRedirect: "/signin"
+  })
+);
+
+// REGISTER
+router.post("/signup", async (req, res) => {
+  try {
+    const name = req.body.Name;
+    const email = req.body.Email;
+    const password = req.body.password;
+
+    bcrypt.hash(password, saltRound, async (err, hash) => {
+      if (err) {
+        console.log(err);
+      } else {
+        await db.query(
+          "INSERT INTO LOGIN (name,email,password) VALUES ($1,$2,$3)",
+          [name, email, hash]
+        );
+
+        res.sendFile(path.join(dir_name, '../public/Animation_dom/index.html'));
+      }
+    });
+
+  } catch (err) {
+    res.send("Already signed up with this email");
+  }
+});
+
+export default router;

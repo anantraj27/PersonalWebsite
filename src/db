@@ -1,0 +1,31 @@
+
+import pg from "pg";
+
+const db = new pg.Client({
+  port: 5236,
+  password: "AnAnT27",
+  database: "LOGIN",
+  host: "localhost",
+  user: "postgres"
+
+});
+db.connect();
+// const db = new Pool({
+//   connectionString: process.env.DATABASE_URL,
+//   ssl: { rejectUnauthorized: false }
+// });
+
+
+
+
+// db.connect();
+db.on("connect", () => {
+  console.log("Connected to database");
+});
+
+db.on("error", (err) => {
+  console.error("DB ERROR:", err);
+});
+
+
+export default db;
