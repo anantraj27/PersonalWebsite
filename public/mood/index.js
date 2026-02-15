@@ -64,10 +64,12 @@ function openEditor(){
 
    document.getElementsByClassName("listScreen")[0].style.display="none";
    document.getElementsByClassName("editorScreen")[0].style.display="block";
+   return ;
 }
 function goBack(){
     document.getElementsByClassName("listScreen")[0].style.display="block";
    document.getElementsByClassName("editorScreen")[0].style.display="none";
+   return ;
 }
 
 function createheart(){
@@ -78,10 +80,13 @@ function createheart(){
     heart.style.left=Math.random()*90 +"vw";
     heart.style.animationDuration = (3 + Math.random()*5) +'s'
     heart.style.fontSize =(15 + Math.random()*25) + "px";
-   document.body.appendChild(heart);
+   document.getElementById("heart-layer").appendChild(heart);
  setTimeout(()=>{
     heart.remove();
  },9000)
 
 }
 setInterval(createheart ,300);
+
+
+/// data mining 
