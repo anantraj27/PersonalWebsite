@@ -45,13 +45,23 @@ nav{
   color: white;
 }
 textarea {
-
+  font-size: larger;
   background-color: black;
   width: 100%;
   
   height: 95vh;
-  
+  padding: 10px;
   box-sizing: border-box; /* Ensures padding and border are included in the 100% width calculation */
+}
+.editorTitle{
+  width: 90%;
+  border: none;
+  font-size: larger;
+  padding: 10px;
+  background-color: black;
+}
+.editorSection{
+  width: 95vw;
 }
 section{
   border: 1px solid yellowgreen;
