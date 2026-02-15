@@ -66,7 +66,7 @@ function createheart(){
     const heart = document.createElement('div');
     heart.innerHTML="❤️";
     heart.classList.add("heart");
-    heart.style.left=Math.random()*100 +"vw";
+    heart.style.left=Math.random()*90 +"vw";
     heart.style.animationDuration = (3 + Math.random()*5) +'s'
     heart.style.fontSize =(15 + Math.random()*25) + "px";
    document.body.appendChild(heart);
