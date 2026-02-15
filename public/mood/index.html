@@ -1,13 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
+    <div class="listScreen">
+        <nav>
+            <div class="left">
+                <div class="threeLine"> ≡</div>
+                <div class="notepad"> Notepad</div>
+            </div>
+            <div class="right">
+                <div class="search">🔍</div>
+                <div class="threeDot">⋮</div>
+            </div>
+
+        </nav>
+        <div class="newnotes" onclick="openEditor()">ADD ➕ </div>
+        <header>
+
+
+            <div class="title"></div>
+
+        </header>
+    </div>
+    <div class="editorScreen" style="display: none;">
+        <nav>
+            <div class="left">
+                <div class="threeLine" onclick="goBack()"> ⬅️ </div>
+                <div class="notepad"> Notepad</div>
+            </div>
+            <div class="right">
+                <div class="search">save 🛟</div>
+                <div class="threeDot"> ⋮ </div>
+            </div>
+        </nav>
+
+    </div>
+
 
 </body>
-<script src="./index.js" ></script>
+<script src="./index.js"></script>
+
 </html>

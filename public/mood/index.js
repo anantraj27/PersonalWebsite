@@ -60,6 +60,15 @@
 //     animateheart();
 // }
 // createheart()
+function openEditor(){
+
+   document.getElementsByClassName("listScreen")[0].style.display="none";
+   document.getElementsByClassName("editorScreen")[0].style.display="block";
+}
+function goBack(){
+    document.getElementsByClassName("listScreen")[0].style.display="block";
+   document.getElementsByClassName("editorScreen")[0].style.display="none";
+}
 
 function createheart(){
 
