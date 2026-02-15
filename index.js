@@ -20,6 +20,8 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 
+
+
 env.config(); /// for acessing  process.env from .env file   
 
 
@@ -54,18 +56,18 @@ app.use(session(
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(router);
+
 
 app.use((req, res, next) => {
-  // console.log("---- NEW REQUEST ----");
+  console.log("---- NEW REQUEST ----");
   // console.log("sessionID:", req.sessionID);
-  // console.log("session:", req.session);
-  //  console.log("session.passport:", req.session?.passport);
+  console.log("session:", req.session);
+  // console.log("session.passport:", req.session?.passport);
   // console.log("req.user:", req.user);
-  // console.log("isAuthenticated:", req.isAuthenticated?.());
+  // console.log("isAuthenticated:", req.isAuthenticated);
   next();
 });
-
+app.use(router)
 
 
 passport.use('local', new Strategy(
@@ -74,9 +76,11 @@ passport.use('local', new Strategy(
     passwordField: "password"
   }, (async function verify(Email, password, cb) {
     const result = await db.query("SELECT * FROM LOGIN WHERE  email = $1", [Email,]);
+
     if (result.rows.length > 0) {
       const user = result.rows[0]
       const storedPassword = result.rows[0].password;
+
       bcrypt.compare(password, storedPassword, (err, result) => {
 
         if (err) {
@@ -117,10 +121,10 @@ passport.use("google", new GoogleStrategy({
 }, async (accessToken, refreshToken, profile, cb) => {
   // console.log(profile);
   try {
-    const result = await db.query("SELECT * FROM LOGIN WHERE  email = $1", [profile.email]);
+    const result = await db.query("SELECT * FROM login WHERE  email = $1", [profile.email]);
     if (result.rows.length === 0) {
 
-      const newuser = await db.query("INSERT INTO LOGIN (email,password) VALUES ($1,$2)", [profile.email, 'google'])
+      const newuser = await db.query("INSERT INTO login (email,password) VALUES ($1,$2)", [profile.email, 'google'])
       cb(null, newuser.rows[0])
 
     }
@@ -134,7 +138,7 @@ passport.use("google", new GoogleStrategy({
 
 }))
 passport.serializeUser((user, cb) => {
-  cb(null, user)
+  cb(null, user.id)
 })
 
 passport.deserializeUser((user, cb) => {

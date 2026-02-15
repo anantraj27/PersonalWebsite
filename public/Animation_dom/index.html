@@ -9,11 +9,11 @@
 </head>
 
 <body>
-       <div class="container"></div>
+    <div class="container"></div>
     <div class="box">
         <div class="date"></div>
 
-        <div><button><span class="vibrate">Mood...🎶</span></button> </div>
+        <div><button class="mood"><span class="vibrate">Mood...🎶</span></button> </div>
     </div>
 
     <p style="color: white;">Hii I am <span>Anant</span> , just a boy in this big universe 🌌 </p>
@@ -21,30 +21,41 @@
 
         <div class="line"></div>
 
+        <form action="/achievments" meththod="get">
 
+            <div class="first " id="achievements">
+                <div class="first-line"></div>
 
-        <div class="first ">
-            <div class="first-line"></div>
+                <button class="card" type="submit">
+                    <div>Achievements <br><br> — small wins that shaped me</div>
+                </button>
+            </div>
+        </form>
 
-            <div class="card">Achievements <br><br> — small wins that shaped me</div>
-        </div>
+        <form action="/photos" method="get">
+            <div class="second " id="photo">
 
-       
-        <div class="second ">
-           
-            <div class="card">Photos / Videos <br> <br> — moments I didn’t want to forget</div>
-             <div class="second-line"></div>
-        </div>
-
-
-         <div class="third ">
-            <div class="third-line"></div>
-            <div class="card">My Mood Swings <br> <br> — thoughts, chaos, clarity</div>
-        </div>
-
-       <div class="bottom">
-            <div class="card">Studies <br><br> — learning, failing, repeating</div>
-        </div>
+                <button class="card" type="submit">
+                    <div>Photos / Videos <br> <br> — moments I didn’t want to forget</div>
+                </button>
+                <div class="second-line"></div>
+            </div>
+        </form>
+        <form action="/mood" method="get">
+            <div class="third " id="mood">
+                <div class="third-line"></div>
+                <button class="card" type="submit">
+                    <div>My Mood Swings <br> <br> — thoughts, chaos, clarity</div>
+                </button>
+            </div>
+        </form>
+        <form action="/studies" method="get">
+            <div class="bottom" id="studies">
+                <button class="card" type="submit">
+                    <div>Studies <br><br> — learning, failing, repeating</div>
+                </button>
+            </div>
+        </form>
 
 
     </div>

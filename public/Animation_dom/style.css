@@ -14,14 +14,7 @@
     box-sizing: border-box;
 }
 
-.ball {
-    height: 10px;
-    width: 10px;
-    border-radius: 50%;
-    border: solid purple;
-    background-color: black;
-    margin-bottom: 70px;
-}
+
 
 .box .date {
     margin-left: 20px;
@@ -33,7 +26,7 @@
     justify-content: space-between;
 }
 
-button {
+.mood {
     font-weight: 800;
 
     font-style: italic;
@@ -163,6 +156,7 @@ footer {
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 0, 0.605);
       padding: 10px;
+      background-color: black;
 }
 
 .bottom {

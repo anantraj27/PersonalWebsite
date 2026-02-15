@@ -6,6 +6,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 const router = express.Router();
 const dir_name = dirname(fileURLToPath(import.meta.url))
+import db from "./db";
 // SECRET
 const saltRound = 10;
 router.get("/secret", (req, res) => {
@@ -16,6 +17,18 @@ router.get("/secret", (req, res) => {
   }
 });
 
+// mood card routes 
+router.get('/mood',(req,res)=>{
+  res.sendFile(path.join(dir_name, '../public/mood/index.html'));
+})
+//ADMIN PANNEL ROUTE   
+router.get("/anantAadmin", (req, res) => {
+  res.sendFile(path.join(dir_name, '../public/admin/admin.html'));
+});
+
+router.post("/diary", (req, res) => {
+ 
+});
 // HOME
 router.get("/", (req, res) => {
   res.sendFile(path.join(dir_name, '../public/first.html'));
@@ -62,12 +75,17 @@ router.post("/signup", async (req, res) => {
 
     bcrypt.hash(password, saltRound, async (err, hash) => {
       if (err) {
-        console.log(err);
+         res.send("Already signed up with this email");
       } else {
-        await db.query(
-          "INSERT INTO LOGIN (name,email,password) VALUES ($1,$2,$3)",
+        try {
+          await db.query(
+          "INSERT INTO login (name,email,password) VALUES ($1,$2,$3)",
           [name, email, hash]
         );
+        } catch (error) {
+          res.send("Already signed up with this email");
+        }
+        
 
         res.sendFile(path.join(dir_name, '../public/Animation_dom/index.html'));
       }
