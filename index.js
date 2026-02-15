@@ -24,13 +24,11 @@ const port = process.env.PORT || 3000;
 
 env.config(); /// for acessing  process.env from .env file   
 
-
 // function check (req,res,next){
 //  console.log(req.body)
 
 //   next();
 // }
-
 
 
 
@@ -115,7 +113,7 @@ passport.use('local', new Strategy(
 passport.use("google", new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL:"https://personalwebsite-1-9nzz.onrender.com/auth/google/secret",
+  callbackURL: "https://personalwebsite-1-9nzz.onrender.com/auth/google/secret",
   userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
 
 }, async (accessToken, refreshToken, profile, cb) => {

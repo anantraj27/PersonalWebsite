@@ -23,7 +23,7 @@ router.get('/mood',(req,res)=>{
 })
 //ADMIN PANNEL ROUTE   
 router.get("/anantAadmin", (req, res) => {
-  res.sendFile(path.join(dir_name, '../public/admin/admin.html'));
+  res.sendFile(path.join(dir_name, '../public/Admin/admin.html'));
 });
 
 router.post("/diary", (req, res) => {
