@@ -54,18 +54,32 @@ textarea {
   box-sizing: border-box; /* Ensures padding and border are included in the 100% width calculation */
 }
 .editorTitle{
-  width: 90%;
+  
   border: none;
   font-size: larger;
   padding: 10px;
+  
+ 
   background-color: black;
 }
-.editorSection{
-  width: 95vw;
-}
+
 section{
   border: 1px solid yellowgreen;
   border-radius: 12px;
+  margin: 20px;
+}
+input:focus {
+  border: none;
+ 
+}
+input:focus {
+  border: none;
+  outline: none;
+}
+
+textarea:focus {
+  border: none;
+  outline: none;
 }
 nav{
   display: flex;
