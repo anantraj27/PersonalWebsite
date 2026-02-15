@@ -1,25 +1,36 @@
 .heart {
-   
-    
-   
-    background-color: black;
-    margin-bottom: 70px;
+  position: absolute;
+   color: red;
+   font-size: 20px;
+ animation:floatup 6s linear infinite;
 }
-.container{
-    width: 100vw;
-  height: 100vh;
-  position: fixed;
-  z-index: -1;
+@keyframes floatup{
 
-  background-color: black;
-  margin: 0;
-
+    from{
+        transform: translateY(100vh);
+        opacity: 1;
+    }
+  to{
+    transform: translateY(-10vh);
+    opacity: 0;
+  }
+}
+footer{
+  color:white;
+  position:absolute;
+  z-index:2;
+  font-size:20px;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
 body{
-    background-color: black;
+  margin:0;
+ min-height:100vh;
+  background:black;
+  overflow:hidden;
+ 
+  font-family: Arial, sans-serif;
+  background-color: black;
 }
-*{
-    
-    margin: 0;
-    box-sizing: border-box;
-}
+

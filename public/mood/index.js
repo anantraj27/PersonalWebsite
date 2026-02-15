@@ -1,62 +1,78 @@
 
-function createheart() {
-    for (var i = 0; i < 10; i++) {
-        var new_ = document.createElement("div");
-        new_.innerHTML = "❤️"
+// function createheart() {
+//     for (var i = 0; i < 10; i++) {
+//         var new_ = document.createElement("div");
+//         new_.innerHTML = "❤️"
 
-        new_.classList.add("heart");
-        document.querySelector(".container").appendChild(new_);
-    }
-    var balls = document.getElementsByClassName("heart");
-
-
-
-    let position = [];
-    let speed = []
-    let direction = [];
-    let screenWidth = window.outerWidth;
-console.log(screenWidth)
-    for (var i = 0; i < balls.length; i++) {
+//         new_.classList.add("heart");
+//         document.querySelector(".container").appendChild(new_);
+//     }
+//     var balls = document.getElementsByClassName("heart");
 
 
-        //  var interval=Math.floor(Math.random()*2)+50;
 
-        var random = Math.floor(Math.random() * screenWidth) + 1;
-        if (i % 2 === 0) {
-            position[i] = random;
-            direction[i] = 1;
-        }
-        else {
-            direction[i] = -1;
-            position[i] = random;
-
-        }
-
-    }
-
-    function animateheart() {
-
-        for (var i = 0; i < balls.length; i++) {
-            speed[i] = Math.floor(Math.random() * 1) + 1;
-            position[i] += speed[i] * direction[i];
-            if (position[i] === screenWidth) {
-                balls.remove()
-            }
-            balls[i].style.marginLeft = position[i] + "px";
-
-            if (screenWidth - 45 <= position[i] || position[i] <= 0) {
-                position[i] = Math.floor(Math.random() * screenWidth) + 1;
-                if (position[i] === screenWidth) {
-                    balls.remove()
-                }
-                direction[i] *= -1;
-            }
-
-        }
-        requestAnimationFrame(animateheart);
+//     let position = [];
+//     let speed = []
+//     let direction = [];
+//     let screenWidth = window.outerWidth;
+// console.log(screenWidth)
+//     for (var i = 0; i < balls.length; i++) {
 
 
-    }
-    animateheart();
+//         //  var interval=Math.floor(Math.random()*2)+50;
+
+//         var random = Math.floor(Math.random() * screenWidth) + 1;
+//         if (i % 2 === 0) {
+//             position[i] = random;
+//             direction[i] = 1;
+//         }
+//         else {
+//             direction[i] = -1;
+//             position[i] = random;
+
+//         }
+
+//     }
+
+//     function animateheart() {
+
+//         for (var i = 0; i < balls.length; i++) {
+//             speed[i] = Math.floor(Math.random() * 1) + 1;
+//             position[i] += speed[i] * direction[i];
+//             if (position[i] === screenWidth) {
+//                 balls.remove()
+//             }
+//             balls[i].style.marginLeft = position[i] + "px";
+
+//             if (screenWidth - 45 <= position[i] || position[i] <= 0) {
+//                 position[i] = Math.floor(Math.random() * screenWidth) + 1;
+//                 if (position[i] === screenWidth) {
+//                     balls.remove()
+//                 }
+//                 direction[i] *= -1;
+//             }
+
+//         }
+//         requestAnimationFrame(animateheart);
+
+
+//     }
+//     animateheart();
+// }
+// createheart()
+
+function createheart(){
+
+    const heart = document.createElement('div');
+    heart.innerHTML="❤️";
+    heart.classList.add("heart");
+    heart.style.left=Math.random()*100 +"vw";
+    heart.style.animationDuration = (3 + Math.random()*5) +'s'
+    heart.style.fontSize =(15 + Math.random()*25) + "px";
+   document.body.appendChild(heart);
+ setTimeout(()=>{
+    heart.remove();
+ },9000)
+
 }
-createheart()
+setInterval(createheart ,300);
