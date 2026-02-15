@@ -3,10 +3,10 @@
 for(var i=0;i<10;i++){
 var new_= document.createElement("div");
 new_.innerHTML="❤️"
-new_.classList.add("ball");
+new_.classList.add("heart");
 document.querySelector(".container").appendChild(new_);
 }
-var balls=document.getElementsByClassName("ball");
+var balls=document.getElementsByClassName("heart");
 let position=[];
 let speed=[]
 let direction=[];
