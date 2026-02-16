@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./style.css">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <body>
@@ -23,13 +24,14 @@
 
         </nav>
         <div class="newnotes" onclick="openEditor()">ADD ➕ </div>
-        <header>
+         <header class="litleList">
 
 
             <div class="title"></div>
 
         </header>
     </div>
+   
     <div class="editorScreen" style="display: none;">
         <nav>
             <div class="left">
@@ -37,7 +39,7 @@
                 <div class="notepad"> Notepad</div>
             </div>
             <div class="right">
-                <div class="search">save 🛟</div>
+                <div class="save">save 🛟</div>
                 <div class="threeDot"> ⋮ </div>
             </div>
         </nav>
@@ -46,7 +48,7 @@
                 <input placeholder="Enter title" type="text" class="editorTitle">
             </header>
             <hr>
-            <textarea placeholder="Enter text"></textarea>
+            <textarea placeholder="Enter text" class="editorText"></textarea>
         </section>
 
     </div>

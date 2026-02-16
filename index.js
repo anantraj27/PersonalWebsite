@@ -29,16 +29,10 @@ env.config(); /// for acessing  process.env from .env file
 
 //   next();
 // }
-
-
-
-
 // app.use(check)
 app.use(express.static("public"));
-
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-
 
 app.use(session(
   {
@@ -60,7 +54,7 @@ app.use((req, res, next) => {
   console.log("---- NEW REQUEST ----");
   // console.log("sessionID:", req.sessionID);
   console.log("session:", req.session);
-  // console.log("session.passport:", req.session?.passport);
+  // console.log("session.passport:", req.session.passport);
   // console.log("req.user:", req.user);
   // console.log("isAuthenticated:", req.isAuthenticated);
   next();
@@ -73,7 +67,13 @@ passport.use('local', new Strategy(
     usernameField: "Email",   // 👈 YEH btana ka liya kii userb=name ka jagah yeh khojo  req body seh... 
     passwordField: "password"
   }, (async function verify(Email, password, cb) {
-    const result = await db.query("SELECT * FROM LOGIN WHERE  email = $1", [Email,]);
+    try {
+
+      const result = await db.query("SELECT * FROM LOGIN WHERE  email = $1", [Email,]);
+    if (result.rows.length === 0) {
+
+      return cb(null,false,{message :"Enter Email is not related to password"})
+    }
 
     if (result.rows.length > 0) {
       const user = result.rows[0]
@@ -85,7 +85,9 @@ passport.use('local', new Strategy(
           return cb(err);
         }
         else {
-
+          if(!result){
+             return cb(null, false, { message: "Wrong password" });
+          }
           if (result) {
             return cb(null, user)
           }
@@ -98,9 +100,12 @@ passport.use('local', new Strategy(
 
 
     }
-    else {
-      return cb('user not found')
+    } catch (error) {
+      cb(error)
     }
+    
+    
+    
 
 
 
@@ -113,7 +118,7 @@ passport.use('local', new Strategy(
 passport.use("google", new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: "https://personalwebsite-1-9nzz.onrender.com/auth/google/secret",
+  callbackURL: "http://localhost:3000/auth/google/secret",
   userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
 
 }, async (accessToken, refreshToken, profile, cb) => {

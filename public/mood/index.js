@@ -63,6 +63,7 @@
 function openEditor(){
 
    document.getElementsByClassName("listScreen")[0].style.display="none";
+   
    document.getElementsByClassName("editorScreen")[0].style.display="block";
    return ;
 }
@@ -72,21 +73,39 @@ function goBack(){
    return ;
 }
 
-function createheart(){
+const save =document.querySelector(".save")
+save.addEventListener('click',async (e)=>{
 
-    const heart = document.createElement('div');
-    heart.innerHTML="❤️";
-    heart.classList.add("heart");
-    heart.style.left=Math.random()*90 +"vw";
-    heart.style.animationDuration = (3 + Math.random()*5) +'s'
-    heart.style.fontSize =(15 + Math.random()*25) + "px";
-   document.getElementById("heart-layer").appendChild(heart);
- setTimeout(()=>{
-    heart.remove();
- },9000)
+   const title = document.querySelector(".editorTitle");
+   const text = document.querySelector(".editorText");
+   let titlevalue =title.value
+   console.log(titlevalue)
+   if(!title.value){
+     titlevalue= 'nan';
+   }
+  if(text.value){
+  await axios.post("http://localhost:3000/notes",{
+   title:titlevalue,
+   text:text.value
+  })
+  alert("saved")
+  }
+})
+// function createheart(){
 
-}
-setInterval(createheart ,300);
+//     const heart = document.createElement('div');
+//     heart.innerHTML="❤️";
+//     heart.classList.add("heart");
+//     heart.style.left=Math.random()*90 +"vw";
+//     heart.style.animationDuration = (3 + Math.random()*5) +'s'
+//     heart.style.fontSize =(15 + Math.random()*25) + "px";
+//    document.getElementById("heart-layer").appendChild(heart);
+//  setTimeout(()=>{
+//     heart.remove();
+//  },9000)
+
+// }
+// setInterval(createheart ,300);
 
 
 /// data mining 

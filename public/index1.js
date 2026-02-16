@@ -92,10 +92,15 @@ userPasword.addEventListener("blur" ,function(){
 })
 
 //  validating the submision ....
+let name =document.getElementById('name')
+let email=document.getElementById('email');
+let Password =document.getElementById("Passsword")
 
+console.log(name)
+console.log(Password)
 let submission =document.querySelector('form')
 
-submission.addEventListener('submit',function(event){
+submission.addEventListener('submit', async function(event){
 
 
   if(!passwordValidation || !nameValidation || !emailValidation){
@@ -103,6 +108,27 @@ submission.addEventListener('submit',function(event){
     alert('fix error')
     return;
   }
+
+event.preventDefault();
+  try {
+    const {data} = await axios.post("/signup", {
+      Name: name.value,
+      Email: email.value,
+       password : Password.value
+    });
+
+    if (data.success) {
+      alert(data.message);
+      location.href = "/signin";
+    }
+    else{
+      alert(data.message);
+    }
+
+  } catch (err) {
+  alert(` Status : ${err.response.status } ${err.response.data.message}`)
+  }
+
 
   
 })

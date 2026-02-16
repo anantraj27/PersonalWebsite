@@ -16,9 +16,16 @@ router.get("/secret", (req, res) => {
     res.redirect("/signin");
   }
 });
-
+/// taking notes from backend data 
+router.post('/notes', async (req, res) => {
+  const title = req.body.title;
+  const text = req.body.text;
+  await db.query(
+    "INSERT INTO notes (title,text) VALUES ($1,$2)", [title, text]
+  )
+})
 // mood card routes 
-router.get('/mood',(req,res)=>{
+router.get('/mood', (req, res) => {
   res.sendFile(path.join(dir_name, '../public/mood/index.html'));
 })
 //ADMIN PANNEL ROUTE   
@@ -27,7 +34,7 @@ router.get("/anantAadmin", (req, res) => {
 });
 
 router.post("/diary", (req, res) => {
- 
+
 });
 // HOME
 router.get("/", (req, res) => {
@@ -60,10 +67,7 @@ router.get("/auth/google/secret",
 
 // LOGIN
 router.post("/signin",
-  passport.authenticate("local", {
-    successRedirect: "/secret",
-    failureRedirect: "/signin"
-  })
+  passport.authenticate("local", (req)
 );
 
 // REGISTER
@@ -75,24 +79,39 @@ router.post("/signup", async (req, res) => {
 
     bcrypt.hash(password, saltRound, async (err, hash) => {
       if (err) {
-         res.send("Already signed up with this email");
-      } else {
+        return res.status(500).json({
+          success:false,
+          message :"internal error occured ...."
+
+        })
+      } 
+      else {
         try {
           await db.query(
-          "INSERT INTO login (name,email,password) VALUES ($1,$2,$3)",
-          [name, email, hash]
-        );
-        } catch (error) {
-          res.send("Already signed up with this email");
+            "INSERT INTO login (name,email,password) VALUES ($1,$2,$3)",
+            [name, email, hash]
+          );
+        } 
+        catch (error) {
+        return   res.status(409).json({
+            success:false,
+            message:"Email already exits ..(Already signup with this email) "
+          })
         }
-        
 
-        res.sendFile(path.join(dir_name, '../public/Animation_dom/index.html'));
+   return res.json({
+        success:true,
+        message: ' Successfully 🎉 Data stored , Authenticate yourself to sign in  '
+      })
+
       }
     });
 
   } catch (err) {
-    res.send("Already signed up with this email");
+   return res.status(404).json({
+      sucess:false,
+      message :"All field required.."
+    })
   }
 });
 
