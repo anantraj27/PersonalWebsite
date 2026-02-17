@@ -1,10 +1,8 @@
 import express from "express";
-import bodyParser from "body-parser";
 
 import db from "./src/db";
 import router from "./src/routes";
 
-import path from "path";
 import bcrypt from "bcrypt"
 import session from "express-session"
 import passport from "passport"
@@ -70,42 +68,42 @@ passport.use('local', new Strategy(
     try {
 
       const result = await db.query("SELECT * FROM LOGIN WHERE  email = $1", [Email,]);
-    if (result.rows.length === 0) {
+      if (result.rows.length === 0) {
 
-      return cb(null,false,{message :"Enter Email is not related to password"})
-    }
+        return cb(null, false, { message: "Enter Email is not related to password" })
+      }
 
-    if (result.rows.length > 0) {
-      const user = result.rows[0]
-      const storedPassword = result.rows[0].password;
+      if (result.rows.length > 0) {
+        const user = result.rows[0]
+        const storedPassword = result.rows[0].password;
 
-      bcrypt.compare(password, storedPassword, (err, result) => {
+        bcrypt.compare(password, storedPassword, (err, result) => {
 
-        if (err) {
-          return cb(err);
-        }
-        else {
-          if(!result){
-             return cb(null, false, { message: "Wrong password" });
-          }
-          if (result) {
-            return cb(null, user)
+          if (err) {
+            return cb(err);
           }
           else {
-            return cb(null, false)
+            if (!result) {
+              return cb(null, false, { message: "Wrong password" });
+            }
+            if (result) {
+              return cb(null, user)
+            }
+            else {
+              return cb(null, false)
+            }
+
           }
-
-        }
-      })
+        })
 
 
-    }
+      }
     } catch (error) {
       cb(error)
     }
-    
-    
-    
+
+
+
 
 
 
@@ -118,7 +116,7 @@ passport.use('local', new Strategy(
 passport.use("google", new GoogleStrategy({
   clientID: process.env.GOOGLE_CLIENT_ID,
   clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-  callbackURL: "http://localhost:3000/auth/google/secret",
+  callbackURL: "https://personalwebsite-1-9nzz.onrender.com/auth/google/secret",
   userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo"
 
 }, async (accessToken, refreshToken, profile, cb) => {

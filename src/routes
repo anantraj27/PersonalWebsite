@@ -25,12 +25,18 @@ router.post('/notes', async (req, res) => {
   )
 })
 // mood card routes 
+
 router.get('/mood', (req, res) => {
-  res.sendFile(path.join(dir_name, '../public/mood/index.html'));
+
+         res.sendFile(path.join(dir_name, '../public/mood/index.html'));
+
 })
+
+
 //ADMIN PANNEL ROUTE   
 router.get("/anantAadmin", (req, res) => {
-  res.sendFile(path.join(dir_name, '../public/Admin/admin.html'));
+
+          res.sendFile(path.join(dir_name, '../public/Admin/admin.html'));
 });
 
 router.post("/diary", (req, res) => {
@@ -38,23 +44,31 @@ router.post("/diary", (req, res) => {
 });
 // HOME
 router.get("/", (req, res) => {
-  res.sendFile(path.join(dir_name, '../public/first.html'));
+
+          res.sendFile(path.join(dir_name, '../public/first.html'));
+
 });
 
 // SIGNIN PAGE
 router.get("/signin", (req, res) => {
-  res.sendFile(path.join(dir_name, '../public/signin.html'));
+
+         res.sendFile(path.join(dir_name, '../public/signin.html'));
+
 });
 
 // SIGNUP PAGE
 router.get("/signup", (req, res) => {
-  res.sendFile(path.join(dir_name, '../public/signup.html'));
+
+       res.sendFile(path.join(dir_name, '../public/signup.html'));
+
 });
 
 // GOOGLE AUTH
 router.get("/auth/google",
-  passport.authenticate("google", {
-    scope: ["profile", "email"]
+
+       passport.authenticate("google", {
+        scope: ["profile", "email"]
+
   })
 );
 
@@ -67,8 +81,11 @@ router.get("/auth/google/secret",
 
 // LOGIN
 router.post("/signin",
-  passport.authenticate("local", (req)
-);
+  passport.authenticate("local", {
+    failureRedirect :"/signin",
+    successRedirect:"/secret"
+  }
+  ));
 
 // REGISTER
 router.post("/signup", async (req, res) => {
@@ -80,37 +97,37 @@ router.post("/signup", async (req, res) => {
     bcrypt.hash(password, saltRound, async (err, hash) => {
       if (err) {
         return res.status(500).json({
-          success:false,
-          message :"internal error occured ...."
+          success: false,
+          message: "internal error occured ...."
 
         })
-      } 
+      }
       else {
         try {
           await db.query(
             "INSERT INTO login (name,email,password) VALUES ($1,$2,$3)",
             [name, email, hash]
           );
-        } 
+        }
         catch (error) {
-        return   res.status(409).json({
-            success:false,
-            message:"Email already exits ..(Already signup with this email) "
+          return res.status(409).json({
+            success: false,
+            message: "Email already exits ..(Already signup with this email) "
           })
         }
 
-   return res.json({
-        success:true,
-        message: ' Successfully 🎉 Data stored , Authenticate yourself to sign in  '
-      })
+        return res.json({
+          success: true,
+          message: ' Successfully 🎉 Data stored , Authenticate yourself to sign in  '
+        })
 
       }
     });
 
   } catch (err) {
-   return res.status(404).json({
-      sucess:false,
-      message :"All field required.."
+    return res.status(404).json({
+      sucess: false,
+      message: "All field required.."
     })
   }
 });
