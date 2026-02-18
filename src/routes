@@ -41,7 +41,7 @@ router.post("/add" , async(req,res) =>{
   const text = req.body.text;
   console.log(title)
   
-  const result = await db1.query("INSERT INTO notes (id,title,text) VALUES ($1,$2,$3) RETURNING *",
+  const result = await db1.query("INSERT INTO notes (user_id,title,text) VALUES ($1,$2,$3) RETURNING *",
     [userid, title ,text]);
 
   
