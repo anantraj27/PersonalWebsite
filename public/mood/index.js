@@ -84,13 +84,13 @@ if (save) {
       if (!titleValue) {
          titleValue = 'nan';
       }
-      console.log(titleValue)
+    
 
       const { data } = await axios.post("/add", {
          title: titleValue,
          text: textValue
       })
-
+   
       if (data.success) {
          alert(data.message);
       }
