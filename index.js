@@ -38,7 +38,7 @@ app.use(session(
     resave: false,
     saveUninitialized: true,
     cookie: {
-      maxAge: 1000 * 60 * 60
+     maxAge: 1000 * 60 * 60 * 24 * 7 // 7 days
     }
 
   }
@@ -53,7 +53,7 @@ app.use((req, res, next) => {
   // console.log("sessionID:", req.sessionID);
   console.log("session:", req.session);
   // console.log("session.passport:", req.session.passport);
-  // console.log("req.user:", req.user);
+  console.log("req.user:", req.user);
   // console.log("isAuthenticated:", req.isAuthenticated);
   next();
 });

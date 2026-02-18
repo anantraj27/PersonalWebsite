@@ -60,37 +60,81 @@
 //     animateheart();
 // }
 // createheart()
-function openEditor(){
+const backArrow = document.querySelector(".backArrow");
+const newnotes = document.querySelector(".newnotes");
+const save = document.querySelector(".save");
 
-   document.getElementsByClassName("listScreen")[0].style.display="none";
-   
-   document.getElementsByClassName("editorScreen")[0].style.display="block";
-   return ;
-}
-function goBack(){
-    document.getElementsByClassName("listScreen")[0].style.display="block";
-   document.getElementsByClassName("editorScreen")[0].style.display="none";
-   return ;
+if (backArrow) {
+   backArrow.addEventListener("click", goBack);
 }
 
-const save =document.querySelector(".save")
-save.addEventListener('click',async (e)=>{
+if (newnotes) {
+   newnotes.addEventListener("click", openEditor);
+}
 
-   const title = document.querySelector(".editorTitle");
-   const text = document.querySelector(".editorText");
-   let titlevalue =title.value
-   console.log(titlevalue)
-   if(!title.value){
-     titlevalue= 'nan';
+if (save) {
+   save.addEventListener("click", async () => {
+
+      const title = document.querySelector(".editorTitle");
+      const text = document.querySelector(".editorText");
+
+      let titleValue = title.value;
+      const textValue = text.value;
+
+      if (!titleValue) {
+         titleValue = 'nan';
+      }
+      console.log(titleValue)
+
+      const { data } = await axios.post("/add", {
+         title: titleValue,
+         text: textValue
+      })
+
+      if (data.success) {
+         alert(data.message);
+      }
+
+
+
+
+
+
+      console.log(title.value, text.value);
+
+   });
+}
+
+function openEditor() {
+   document.querySelector(".listScreen").style.display = "none";
+   document.querySelector(".editorScreen").style.display = "block";
+   if (document.querySelector(".editorTitle").value) {
+      document.querySelector(".editorTitle").value = ''
    }
-  if(text.value){
-  await axios.post("http://localhost:3000/notes",{
-   title:titlevalue,
-   text:text.value
-  })
-  alert("saved")
-  }
-})
+   if (document.querySelector(".editorText").value) {
+      document.querySelector(".editorText").value=''
+   }
+
+}
+
+function goBack() {
+   document.querySelector(".listScreen").style.display = "block";
+   document.querySelector(".editorScreen").style.display = "none";
+}
+
+
+
+//    if(!title.value){
+//      titlevalue= 'nan';
+//    }
+//   if(text.value){
+//   await axios.post("http://localhost:3000/notes",{
+//    title:titlevalue,
+//    text:text.value
+//   })
+//   alert("saved")
+//   }
+// })
 // function createheart(){
 
 //     const heart = document.createElement('div');
