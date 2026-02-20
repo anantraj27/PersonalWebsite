@@ -72,7 +72,7 @@ router.get("/getNotes" , async(req,res) =>{
   // const text = req.body.text;
   // console.log(title)
   
-  const result = await db.query("SELECT * FROM notes WHERE user_id =$1",
+  const result = await db.query("SELECT * FROM notes WHERE user_d =$1",
     [userid,]);
 
   
@@ -102,9 +102,11 @@ router.post("/diary", (req, res) => {
 });
 // HOME
 router.get("/", (req, res) => {
-
-          res.sendFile(path.join(dir_name, '../public/first.html'));
-
+  if (req.isAuthenticated()) {
+    res.redirect("/secret");
+  } else {
+    res.sendFile(path.join(dir_name, '../public/first.html'));
+  }
 });
 
 // SIGNIN PAGE
