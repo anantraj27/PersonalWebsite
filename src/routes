@@ -72,7 +72,7 @@ router.get("/getNotes" , async(req,res) =>{
   // const text = req.body.text;
   // console.log(title)
   
-  const result = await db.query("SELECT * FROM notes WHERE user_d =$1",
+  const result = await db.query("SELECT * FROM notes WHERE user_id =$1",
     [userid,]);
 
   
