@@ -4,6 +4,7 @@
 //         var new_ = document.createElement("div");
 //         new_.innerHTML = "❤️"
 
+
 //         new_.classList.add("heart");
 //         document.querySelector(".container").appendChild(new_);
 //     }
@@ -64,6 +65,44 @@ const backArrow = document.querySelector(".backArrow");
 const newnotes = document.querySelector(".newnotes");
 const save = document.querySelector(".save");
 
+const listScreen = document.querySelector(".listScreen");
+
+if (listScreen) {
+
+   (async () => {
+      console.log('await');
+      const data1 = await axios.get("/getNotes", {
+         withCredentials: true
+      })
+      console.log("hii data",data1.data)
+      const values =data1.data
+
+     
+
+      if (data1) {
+         values.forEach(element => {
+
+            const title_list = document.createElement("div");
+            title_list.classList.add("title");
+            title_list.innerHTML = element.title;
+            listScreen.querySelector("header").appendChild(title_list);
+
+
+
+
+         });
+      }
+   
+
+
+   })();
+
+
+}
+
+
+
+
 if (backArrow) {
    backArrow.addEventListener("click", goBack);
 }
@@ -84,15 +123,17 @@ if (save) {
       if (!titleValue) {
          titleValue = 'nan';
       }
-    
+
 
       const { data } = await axios.post("/add", {
          title: titleValue,
          text: textValue
       })
-   
+      console.log(data.notes)
       if (data.success) {
          alert(data.message);
+        location.href = "/notes";
+         
       }
 
 
@@ -112,7 +153,7 @@ function openEditor() {
       document.querySelector(".editorTitle").value = ''
    }
    if (document.querySelector(".editorText").value) {
-      document.querySelector(".editorText").value=''
+      document.querySelector(".editorText").value = ''
    }
 
 }

@@ -42,14 +42,40 @@ body {
   margin: 0;
   min-height: 100vh;
   background: black;
-  overflow: hidden;
+
 
   font-family: Arial, sans-serif;
   background-color: black;
 }
-nav{
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+
   display: flex;
-  color: white;
+  justify-content: space-between;
+  margin: 0;
+  background-color: rgba(35, 30, 30, 0.95);
+  padding: 20px;
+}
+.titleList{
+  position: absolute;
+  top: 80px;          /* space for navbar */
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  overflow-y: auto;
+}
+section{
+  position: fixed;
+  top: 90px;          /* space for navbar */
+  left: 0;
+  right: 0;
+  bottom: 0;
+
 }
 *{
   color: white;
@@ -127,8 +153,7 @@ nav{
 }
 .newnotes {
 
-margin: 20px;
-width: 100px;
-border: 1px solid white;
-padding: 20px;
+background-color: rgba(172, 255, 47, 0.76);
+padding: 4px;
+border-radius: 12px;
 }

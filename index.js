@@ -142,9 +142,21 @@ passport.serializeUser((user, cb) => {
   cb(null, user.id)
 })
 
-passport.deserializeUser((user, cb) => {
-  cb(null, user)
-})
+passport.deserializeUser(async (id, done) => {
+  try {
+    const result = await db.query(
+      "SELECT * FROM login WHERE id = $1",
+      [id]
+    );
+
+    done(null, result.rows[0]);  
+    // --> req.user = result.rows[0]
+
+  } catch (err) {
+    done(err, null);
+  }
+});
+
 
 app.listen(port, () => {
   console.log(`app is listining on ${port} port `)
