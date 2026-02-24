@@ -79,8 +79,8 @@ if ('virtualKeyboard' in navigator) {
       if (height > 0) {
 
       //  editorText
-      textarea.style.marginBottom = `${height}px`;
-      textarea.style.height = `calc(100% - ${height}px)`;
+      editorText.style.marginBottom = `${height}px`;
+      editorText.style.height = `calc(100% - ${height}px)`;
       }
       else {
      textarea.style.marginBottom = '0px';
