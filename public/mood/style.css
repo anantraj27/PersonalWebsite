@@ -41,7 +41,7 @@ footer {
 body {
   margin: 0;
   min-height: 100vh;
-  background: black;
+  color: black;
 
 
   font-family: Arial, sans-serif;
@@ -71,7 +71,7 @@ nav {
 }
 section{
   position: fixed;
-  top: 90px;          /* space for navbar */
+  top: 100px;          /* space for navbar */
   left: 0;
   right: 0;
   bottom: 0;
@@ -81,33 +81,64 @@ section{
   color: white;
 }
 textarea {
-  font-size: larger;
+ font-size: 18px;
+  line-height: 1.6;
   background-color: black;
   width: 100%;
-  
+  border: none;
   height: 95vh;
   padding: 10px;
+  border-top: 1px solid rgba(28, 2, 2, 0.245);
+  
   box-sizing: border-box; /* Ensures padding and border are included in the 100% width calculation */
 }
+
+
+h1{
+  margin: 0;
+}
 .editorTitle{
+  font-size: 2rem;     /* same as h1 */
+  font-weight: bold;
   
+  width: 100%;
   border: none;
-  font-size: larger;
-  padding: 10px;
+
   
- 
   background-color: black;
 }
 
 section{
  
   position: fixed;
-  border: 1px solid yellowgreen;
+  border: 1px solid black;
+  z-index: 10000;
+  
   border-radius: 12px;
 
   left:20px;
   right:20px;
- 
+
+
+}
+
+.fonts{
+
+font-size: x-large;
+border-color: rgb(177, 177, 22);
+  display: inline;
+  display: flex;
+  opacity: 0.9;
+  align-items: center;
+  justify-content: center;
+ z-index: 2;
+  position: absolute;
+  bottom: 10%;
+  right: 0;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: white;
 }
 input:focus {
   border: none;
@@ -128,26 +159,32 @@ nav{
   margin: 20px;
   background-color:rgba(35, 30, 30, 0.808);
   padding: 20px;
+  align-items: center;
 }
 .left{
+  align-items: center;
   text-align: center;
   display: flex;
-  width: 20%;
-  gap: 50px;
-  justify-content: flex-start;
+  
+  gap: 40px;
+ justify-content: space-evenly; 
+
 }
 .right{
+  align-items: center;
   text-align: center;
   display: flex;
-  width: 20%;
-  gap: 50px;
-  justify-content: flex-end;
+
+ gap: 40px;
+ 
+ justify-content: space-evenly;
 }
 
 .title{
   margin: 20px;
-  border: 1px solid yellowgreen;
-  border-radius: 12px;
+  display: flex;
+
+  
   height: 40px;
   overflow: hidden;
 }
@@ -157,3 +194,135 @@ background-color: rgba(172, 255, 47, 0.76);
 padding: 4px;
 border-radius: 12px;
 }
+.extra{
+  display: flex;
+justify-content: center;
+gap: 3px;
+}
+.study,.happy{
+ 
+ padding: 5px;
+ border-radius: 12px;
+ width: 100px;
+
+ 
+}
+.study:hover{
+  background-color: rgba(172, 255, 47, 0.662);
+}
+.happy:hover{
+  background-color: rgba(172, 255, 47, 0.789);
+}
+.personal{
+
+ padding: 5px;
+ width: 100px;
+ border-radius: 12px;
+ 
+
+}
+.personal:hover{
+  background-color: rgba(189, 29, 189, 0.884);
+}
+.idea{
+
+ padding: 5px;
+ width: 100px;
+ border-radius: 12px;
+
+
+}
+.idea:hover{
+background-color: rgba(61, 61, 199, 0.473);
+}
+.motivated{
+
+   padding: 5px;
+   width: 100px;
+ border-radius: 12px;
+
+ color: white;
+}
+.motivated:hover{
+ background-color: rgb(128, 36, 36);
+}
+.normal{
+  width: 100px;
+   padding: 5px;
+ border-radius: 12px;
+}
+.normal:hover{
+  background-color:rgb(108, 108, 180);
+
+}
+.romantic{
+   width: 100px;
+   padding: 5px;
+ border-radius: 12px;
+}
+.romantic:hover{
+  background-color:rgba(255, 192, 203, 0.559);
+
+}
+.category{
+display: none;
+position: absolute;
+top: 100%;
+  background-color:rgb(33, 19, 19);
+      padding: 5px;
+  border-radius: 12px;
+
+}
+.choose1 ,.choose2{
+  width:150px;
+ position: relative;
+  padding: 10px;
+  border-radius: 12px;
+  background-color: rgba(128, 128, 128, 0.458);
+  display: flex;
+  flex-direction: column;
+  align-items:  center;
+}
+.choose2:hover,.choose1:hover{
+
+  background-color: gray;
+}
+.mood{
+  display: none;
+  position: absolute;
+  top: 100%;
+    background-color:rgb(33, 19, 19);
+    padding: 5px;
+  border-radius: 12px;
+}
+.arrow {
+  display: block;
+  transition: transform 0.25s ease;
+}
+.choose1.open .arrow {
+  transform: rotate(180deg);
+}
+.choose2.open .arrow {
+  transform: rotate(180deg);
+}
+
+.choose2.open{
+
+  transform: translateY(-8px);
+   background-color: rgb(89, 138, 89);
+  
+}
+.choose1.open{
+
+  transform: translateY(-8px);
+
+  background-color: rgb(89, 138, 89);
+
+  
+}
+
+.textStyle{
+
+font-size: x-large;
+}
+

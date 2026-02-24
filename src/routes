@@ -28,62 +28,79 @@ router.get("/secret", (req, res) => {
 
 router.get('/notes', (req, res) => {
 
-         res.sendFile(path.join(dir_name, '../public/mood/index.html'));
+  res.sendFile(path.join(dir_name, '../public/mood/index.html'));
 
 })
 
-router.post("/add" , async(req,res) =>{
+router.post("/add", async (req, res) => {
   try {
-    
-  const userid = req.user.id;
- 
-  const title = req.body.title;
-  const text = req.body.text;
-  console.log(title)
-  
-  const result = await db.query("INSERT INTO notes (user_id,title,text) VALUES ($1,$2,$3) RETURNING *",
-    [userid, title ,text]);
 
-  
+    const userid = req.user.id;
 
-    if(result){
+    const title = req.body.title;
+    const text = req.body.text;
+    console.log(title)
 
-    return  res.json({
-      success : true,
-      message :"saved succesfully ..🐘",
-      notes : result
-   
-     })
+    const result = await db.query("INSERT INTO notes (user_id,title,text) VALUES ($1,$2,$3) RETURNING *",
+      [userid, title, text]);
+
+
+
+    if (result) {
+
+      return res.json({
+        success: true,
+        message: "saved succesfully ..🐘",
+        notes: result
+
+      })
     }
   } catch (error) {
-    
+
   }
 
 
 
 })
-router.get("/getNotes" , async(req,res) =>{
+router.get("/getNotes", async (req, res) => {
   try {
-    
-  const userid = req.user.id;
-  console.log("hii",userid)
- 
-  // const title = req.body.title;
-  // const text = req.body.text;
-  // console.log(title)
-  
-  const result = await db.query("SELECT * FROM notes WHERE user_id =$1",
-    [userid,]);
 
-  
+    const userid = req.user.id;
+    console.log("hii", userid)
+    console.log("query title",req.query.title)
+    if (req.query.title) {
 
-    if(result){
-      console.log(result.rows)
+      const result = await db.query("SELECT * FROM notes WHERE user_id =$1 AND title =$2",
+        [userid, req.query.title,]);
 
- return  res.send(result.rows)
+
+
+      if (result) {
+        console.log(result.rows)
+
+        return res.send(result.rows)
+      }
+
     }
+
+    // const title = req.body.title;
+    // const text = req.body.text;
+    // console.log(title)
+    else {
+      const result = await db.query("SELECT * FROM notes WHERE user_id =$1",
+        [userid,]);
+
+
+
+      if (result) {
+        console.log(result.rows)
+
+        return res.send(result.rows)
+      }
+    }
+
   } catch (error) {
-    
+
   }
 
 
@@ -94,7 +111,7 @@ router.get("/getNotes" , async(req,res) =>{
 //ADMIN PANNEL ROUTE   
 router.get("/anantAadmin", (req, res) => {
 
-          res.sendFile(path.join(dir_name, '../public/Admin/admin.html'));
+  res.sendFile(path.join(dir_name, '../public/Admin/admin.html'));
 });
 
 router.post("/diary", (req, res) => {
@@ -112,22 +129,22 @@ router.get("/", (req, res) => {
 // SIGNIN PAGE
 router.get("/signin", (req, res) => {
 
-         res.sendFile(path.join(dir_name, '../public/signin.html'));
+  res.sendFile(path.join(dir_name, '../public/signin.html'));
 
 });
 
 // SIGNUP PAGE
 router.get("/signup", (req, res) => {
 
-       res.sendFile(path.join(dir_name, '../public/signup.html'));
+  res.sendFile(path.join(dir_name, '../public/signup.html'));
 
 });
 
 // GOOGLE AUTH
 router.get("/auth/google",
 
-       passport.authenticate("google", {
-        scope: ["profile", "email"]
+  passport.authenticate("google", {
+    scope: ["profile", "email"]
 
   })
 );
@@ -142,8 +159,8 @@ router.get("/auth/google/secret",
 // LOGIN
 router.post("/signin",
   passport.authenticate("local", {
-    failureRedirect :"/signin",
-    successRedirect:"/secret"
+    failureRedirect: "/signin",
+    successRedirect: "/secret"
   }
   ));
 
