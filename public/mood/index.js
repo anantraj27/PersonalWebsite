@@ -83,8 +83,8 @@ if ('virtualKeyboard' in navigator) {
       editorText.style.height = `calc(100% - ${height}px)`;
       }
       else {
-     textarea.style.marginBottom = '0px';
-      textarea.style.height = '100%';
+     editorText.style.marginBottom = '0px';
+      editorText.style.height = '100%';
 
       }
       console.log('Virtual keyboard geometry changed:', x, y, width, height);
