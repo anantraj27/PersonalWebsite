@@ -1,6 +1,6 @@
 import express from "express";
 
-import db from "./src/db";
+import  from "./src/db";
 import router from "./src/routes";
 
 import bcrypt from "bcrypt"

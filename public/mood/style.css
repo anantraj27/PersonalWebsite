@@ -86,10 +86,11 @@ textarea {
   background-color: black;
   width: 100%;
   border: none;
-  height: 95vh;
-  padding: 10px;
-  border-top: 1px solid rgba(28, 2, 2, 0.245);
+  height: 100%;
   
+margin-bottom: 400px;
+  border-top: 1px solid rgba(28, 2, 2, 0.245);
+  transition: margin-bottom 0.3s ease; /
   box-sizing: border-box; /* Ensures padding and border are included in the 100% width calculation */
 }
 

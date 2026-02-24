@@ -78,10 +78,13 @@ if ('virtualKeyboard' in navigator) {
 
       if (height > 0) {
 
-         styles.style.bottom = `${height}px`
+      //  editorText
+      textarea.style.marginBottom = `${height}px`;
+      textarea.style.height = `calc(100% - ${height}px)`;
       }
       else {
-         styles.style.bottom = '10%';
+     textarea.style.marginBottom = '0px';
+      textarea.style.height = '100%';
 
       }
       console.log('Virtual keyboard geometry changed:', x, y, width, height);
@@ -90,12 +93,11 @@ if ('virtualKeyboard' in navigator) {
 }
 
 editorText.addEventListener('click', () => {
-   if ('virtualKeyboard' in navigator) {
+   
       // The VirtualKeyboard API is supported!
-      editorText.focus();
-      console.log(navigator.virtualKeyboard.overlaysContent = true);
+      
       navigator.virtualKeyboard.show();  /// here not puttin  gememotry bcz as many times ... click click gemotry triggered leads to leakage of memory 
-   }
+   
 });
 
 
