@@ -64,40 +64,13 @@
 
 let editorText = document.querySelector(".editorText");
 let styles = document.querySelector(".style");
+window.visualViewport.addEventListener("resize", () => {
+  const keyboardHeight = Math.max(
+    0,
+    window.innerHeight - window.visualViewport.height
+  );
 
-if ('virtualKeyboard' in navigator) {
-   // The VirtualKeyboard API is supported!
-   editorText.focus();
-
-   navigator.virtualKeyboard.overlaysContent = true;
-   console.log(navigator.virtualKeyboard.overlaysContent = true)
-
-
-   navigator.virtualKeyboard.addEventListener('geometrychange', (event) => {
-      const { x, y, width, height } = event.target.boundingRect;
-
-      if (height > 0) {
-
-      //  editorText
-      editorText.style.marginBottom = `${height}px`;
-      editorText.style.height = `calc(100% - ${height}px)`;
-      }
-      else {
-     editorText.style.marginBottom = '0px';
-      editorText.style.height = '100%';
-
-      }
-      console.log('Virtual keyboard geometry changed:', x, y, width, height);
-   });
-
-}
-
-editorText.addEventListener('click', () => {
-   
-      // The VirtualKeyboard API is supported!
-      
-      navigator.virtualKeyboard.show();  /// here not puttin  gememotry bcz as many times ... click click gemotry triggered leads to leakage of memory 
-   
+  editorText.style.paddingBottom = keyboardHeight + "px";
 });
 
 
