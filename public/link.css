@@ -1,0 +1,73 @@
+  body {
+      background-color: black;
+      text-align: center;
+      color: white;
+
+    }
+    h2{
+         border-bottom: 1px solid rgba(232, 230, 227, 0.35);
+         letter-spacing: 0.4px;
+         padding: 20px;
+    }
+   
+
+    h3 {
+      font-family:  sans-serif;
+      font-weight: 600;
+      font-size: 1.4rem;
+      line-height: 1.9;
+      color: #e8e6e3;
+      padding-bottom: 0.4rem;
+      margin-bottom: 1.4rem;
+   
+      letter-spacing: 0.4px;
+    
+    }
+
+    .block {
+      display: flex;
+
+      gap: 20px;
+      width: 95%;
+      justify-content: flex-end;
+      position: fixed;
+
+   
+      animation:   floatup 3s linear 0.5 ;
+      
+    }
+    @keyframes floatup {
+
+  from {
+    transform: translateY(100vh);
+    
+  }
+
+  to {
+    transform: translateY(-70vh);
+  
+  }
+}
+   .ghost_space{
+      height: 40px;
+      visibility: hidden;
+    }
+
+    .signin {
+      padding: 7px;
+      border: none;
+      color: white;
+
+      background-color: black;
+    }
+
+    .signup {
+      padding: 7px;
+      border: 1px solid black;
+      border-radius: 8px;
+      border-color: white;
+      color: white;
+      background-color: black;
+    }
+
+    

@@ -65,12 +65,12 @@
 let editorText = document.querySelector(".editorText");
 let styles = document.querySelector(".style");
 window.visualViewport.addEventListener("resize", () => {
-  const keyboardHeight = Math.max(
-    0,
-    window.innerHeight - window.visualViewport.height
-  );
+   const keyboardHeight = Math.max(
+      0,
+      window.innerHeight - window.visualViewport.height
+   );
 
-  editorText.style.paddingBottom = keyboardHeight + "px";
+   editorText.style.paddingBottom = keyboardHeight + "px";
 });
 
 
@@ -266,7 +266,7 @@ if (listScreen) {
             title_list.addEventListener('click', async function () {
 
 
-               ///              # putting notes in notepad related to titles .....
+               ///              # putting text in notepad related to titles .....
 
                openEditor1();
                console.log(title_list.innerHTML)
@@ -298,7 +298,7 @@ if (listScreen) {
 
 
 
-   })();   ////  * Imediately invoked on openeing notepad ..... (IIFO) FUNCTION ...
+   })();   ////  * "Imediately invoked on openeing notepad ..... (IIFO) FUNCTION ..."
 
    // const title = document.querySelectorAll(".title");
    // console.log("hii titl ",title)
@@ -322,7 +322,7 @@ if (listScreen) {
 
 
 
-
+///                #work during posting  new notes 
 if (newnotes) {
    newnotes.addEventListener("click", function openEditor() {
       document.querySelector(".listScreen").style.display = "none";
@@ -344,10 +344,45 @@ if (newnotes) {
          if (!titleValue) {
             titleValue = 'nan';
          }
+         const network_status = navigator.onLine;
+         console.log(network_status)
+
+
+
+         if (!network_status) {
+            console.log("hii hello1")
+            let localData = {
+               id: crypto.randomUUID(),
+               title: titleValue,
+               text: textValue
+            }
+
+            console.log(localData);
+
+
+
+            let existing_data = JSON.parse(localStorage.getItem('diary'))
+            if (!Array.isArray(existing_data)) {
+               existing_data = []; // Reset to empty array if data is corrupted or null
+            }
+
+            existing_data.push(localData)
+
+
+
+            console.log(existing_data)
+
+
+
+            localStorage.setItem('diary', JSON.stringify(existing_data));
+
+         }
+         console.log("hii hello2")
 
          const { data } = await axios.post("/add", {
             title: titleValue,
-            text: textValue
+            text: textValue,
+            network_status: network_status
          })
          console.log(data.notes)
          if (data.success) {
@@ -356,6 +391,10 @@ if (newnotes) {
 
          }
       };
+
+
+
+
       if (save) {
          save.addEventListener("click", handleAction)
       }

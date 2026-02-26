@@ -58,9 +58,11 @@ p {
     font-family: cursive;
 }
 
-p>span {
+/* p>span {
     font-size: x-large;
-}
+    font-family:
+
+} */
 
 * {
     color: white;
@@ -109,7 +111,7 @@ footer {
  
   min-height:85vh;   /* minimum screen height */
   height:auto;   
-    margin-top: 50px;
+    margin-top: 150px;
 
     width: 95vw;
     margin: auto;
@@ -289,3 +291,11 @@ footer {
   50%  { opacity: 0.9; }
   100% { opacity: 0.3; }
 } */
+
+p >span{
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight:800;
+  font-style: normal;
+  font-size: x-large;
+}
