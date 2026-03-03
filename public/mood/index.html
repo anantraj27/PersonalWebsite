@@ -1,121 +1,89 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-     <!--
+    <head>
+        <meta charset="UTF-8" />
+        <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+        <!--
 Source - https://stackoverflow.com/a/79200131
 Posted by yurenchen, modified by community. See post 'Timeline' for change history
 Retrieved 2026-02-25, License - CC BY-SA 4.0
 -->
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content"
+        />
 
-    <title>Document</title>
-    <link rel="stylesheet" href="/mood/style.css">
+        <title>Document</title>
+        <link rel="stylesheet" href="/mood/style.css" />
+    </head>
 
+    <body>
+        <div id="heart-layer"></div>
 
+        <!-- LIST SCREEEEN   .........       -->
+        <div class="listScreen">
+            <nav>
+                <div class="left">
+                    <div class="threeLine">≡</div>
+                    <div class="notepad">Notepad</div>
+                </div>
+                <div class="right">
+                    <div class="newnotes">➕</div>
+                    <div class="search">🔍</div>
+                    <div class="threeDot">⋮</div>
+                </div>
+            </nav>
+            <header class="titleList"></header>
+        </div>
 
+        <!-- Editor Screen ........... -->
 
-</head>
-
-<body>
-    <div id="heart-layer"></div>
-
-    <!-- LIST SCREEEEN   .........       -->
-    <div class="listScreen">
-        <nav>
-            <div class="left">
-                <div class="threeLine"> ≡</div>
-                <div class="notepad"> Notepad</div>
-            </div>
-            <div class="right">
-                <div class="newnotes"> ➕ </div>
-                <div class="search">🔍</div>
-                <div class="threeDot">⋮</div>
-
-            </div>
-
-        </nav>
-
-        <header class="titleList">
-
-
-
-
-        </header>
-    </div>
-
-    <!-- Editor Screen ........... -->
-
-    <div class="editorScreen" style="display: none;">
-        <nav>
-            <div class="left">
-                <div class="backArrow"> ⬅️ </div>
-                <div class="notepad"> Notepad</div>
-            </div>
-            <div class="right">
-               
-           
-                <div class="save"><span>save 💾</span></div>
-                 <div class="textStyle"><span>︙</span></div>
-
-
-            </div>
-        </nav>
-        <section class="editorSection">
-
-            <header>
-                <input placeholder="Enter title" type="text" class="editorTitle">
-            </header>
-            <hr>
-            <div class="extra">
-
-
-                <div class="choose1"><span class="label1">Choose Category :</span>  <span class="arrow">⌄</span>
-                    <div class="category">
-
-                        <div class="study">📘 study</div>
-                        <div class="personal">🧑‍🦱 Personal</div>
-                        <div class="idea">💡 Idea</div>
-
+        <div class="editorScreen" style="display: none">
+            <nav>
+                <div class="left">
+                    <div class="backArrow">⬅️</div>
+                    <div class="notepad">Notepad</div>
+                </div>
+                <div class="right">
+                    <button class="save">save 💾</button>
+                    <div class="textStyle"><span>︙</span></div>
+                </div>
+            </nav>
+            <section class="editorSection">
+                <header>
+                    <input placeholder="Enter title" type="text" class="editorTitle" />
+                </header>
+                <hr />
+                <div class="extra">
+                    <div class="choose1">
+                        <span class="label1">Choose Category :</span>
+                        <span class="arrow">⌄</span>
+                        <div class="category">
+                            <div class="study">📘 study</div>
+                            <div class="personal">🧑‍🦱 Personal</div>
+                            <div class="idea">💡 Idea</div>
+                        </div>
                     </div>
 
-                </div>
-
-
-
-                <div class="choose2"><span class="label">Choose mood :</span> <span class="arrow">⌄</span>
-                    <div class="mood">
-
-
-                        <div class="happy">😊 Happy</div>
-                        <div class="motivated">🔥 Motivated</div>
-                        <div class="normal">🙂 Normal</div>
-                        <div  class="romantic">❤️ Romantic </div>
-
+                    <div class="choose2">
+                        <span class="label">Choose mood :</span>
+                        <span class="arrow">⌄</span>
+                        <div class="mood">
+                            <div class="happy">😊 Happy</div>
+                            <div class="motivated">🔥 Motivated</div>
+                            <div class="normal">🙂 Normal</div>
+                            <div class="romantic">❤️ Romantic</div>
+                        </div>
                     </div>
-
-
                 </div>
+                <div class="fonts">🖌️</div>
 
-            </div>
-           <div class="fonts">🖌️</div>
+                <textarea placeholder="Write notes ✏️.." class="editorText"> </textarea>
+            </section>
+        </div>
+    </body>
 
-            <textarea  placeholder="Write notes ✏️.." class="editorText">     </textarea>
-            
-
-        </section>
-
-    </div>
-
-
-</body>
-
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="/mood/index.js"></script>
-
-
-
+    <script type="module" src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script type="module" src="/mood/index.js"></script>
 </html>

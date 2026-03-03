@@ -1,70 +1,81 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="/Animation_dom/style.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+            rel="stylesheet"
+        />
+    </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="/Animation_dom/style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
-</head>
+    <body>
+        <div class="container"></div>
+        <div class="box">
+            <div class="date"></div>
 
-<body>
-    <div class="container"></div>
-    <div class="box">
-        <div class="date"></div>
-
-        <div><button class="mood"><span class="vibrate">Mood...🎶</span></button> </div>
-    </div>
-
-    <p style="color: white;">Hii I am <span>Anant</span>,just a boy in this big universe 🌌 </p>
-    <div class="timeline">
-
-        <div class="line"></div>
-
-        <form action="/achievments" meththod="get">
-
-            <div class="first " id="achievements">
-                <div class="first-line"></div>
-
-                <button class="card" type="submit">
-                    <div>Achievements <br><br> — small wins that shaped me</div>
-                </button>
+            <div>
+                <button class="mood"><span class="vibrate">Mood...🎶</span></button>
             </div>
-        </form>
+        </div>
 
-        <form action="/photos" method="get">
-            <div class="second " id="photo">
+        <p style="color: white">Hii I am <span>Anant</span>,just a boy in this big universe 🌌</p>
+        <div class="timeline">
+            <div class="line"></div>
 
-                <button class="card" type="submit">
-                    <div>Photos / Videos <br> <br> — moments I didn’t want to forget</div>
-                </button>
-                <div class="second-line"></div>
-            </div>
-        </form>
-        <form action="/notes" method="get">
-            <div class="third " id="mood">
-                <div class="third-line"></div>
-                <button class="card" type="submit">
-                    <div>My Notes <br> <br> — thoughts, chaos, clarity</div>
-                </button>
-            </div>
-        </form>
-        <form action="/studies" method="get">
-            <div class="bottom" id="studies">
-                <button class="card" type="submit">
-                    <div>Studies <br><br> — learning, failing, repeating</div>
-                </button>
-            </div>
-        </form>
+            <form action="/achievments" meththod="get">
+                <div class="first" id="achievements">
+                    <div class="first-line"></div>
 
+                    <button class="card" type="submit">
+                        <div>
+                            Achievements <br /><br />
+                            — small wins that shaped me
+                        </div>
+                    </button>
+                </div>
+            </form>
 
-    </div>
-    <footer>Made with love 💙 </footer>
-    <script src="/Animation_dom/index.js"></script>
-</body>
-
+            <form action="/photos" method="get">
+                <div class="second" id="photo">
+                    <button class="card" type="submit">
+                        <div>
+                            Photos / Videos <br />
+                            <br />
+                            — moments I didn’t want to forget
+                        </div>
+                    </button>
+                    <div class="second-line"></div>
+                </div>
+            </form>
+            <form action="/notes" method="get">
+                <div class="third" id="mood">
+                    <div class="third-line"></div>
+                    <button class="card" type="submit">
+                        <div>
+                            My Notes <br />
+                            <br />
+                            — thoughts, chaos, clarity
+                        </div>
+                    </button>
+                </div>
+            </form>
+            <form action="/studies" method="get">
+                <div class="bottom" id="studies">
+                    <button class="card" type="submit">
+                        <div>
+                            Studies <br /><br />
+                            — learning, failing, repeating
+                        </div>
+                    </button>
+                </div>
+            </form>
+        </div>
+        <footer>Made with love 💙</footer>
+        <script type="module" src="/Animation_dom/index.js"></script>
+    </body>
 </html>

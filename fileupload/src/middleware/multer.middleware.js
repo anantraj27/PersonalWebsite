@@ -1,23 +1,18 @@
-import multer from "multer";
-import { fileTypeFromBuffer } from "file-type";
+import multer from 'multer';
+import { fileTypeFromBuffer } from 'file-type';
 
-
-// using the property of multer to storing file on  disk storage .. 
+// using the property of multer to storing file on  disk storage ..
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './public/temp')
-  },
-  filename: function (req, file, cb) {
+    destination: function (req, file, cb) {
+        cb(null, './public/temp');
+    },
+    filename: function (req, file, cb) {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+        cb(null, file + '-' + uniqueSuffix);
+    },
+});
 
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-    cb(null, file + '-'+uniqueSuffix)
-  },
-
-
-
-})
-
-//  filtering the type of file  that we can upload .. 
+//  filtering the type of file  that we can upload ..
 // const filefilter = (req, file, cb) => {
 //   if (file.mimetype === 'image/jpeg' ||
 //     file.mimetype === 'image/png' || file.mimetype === 'image/gif') {
@@ -29,15 +24,12 @@ const storage = multer.diskStorage({
 // }
 // craating multer objct ....
 const upload = multer({
-  storage: storage,
- 
-  limits: { fileSize: 1 * 1024 * 1024 }
-}
+    storage: storage,
 
-)
+    limits: { fileSize: 1 * 1024 * 1024 },
+});
 
 export default upload;
-
 
 // Then Multer attaches this object to request:
 /*

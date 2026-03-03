@@ -14,8 +14,6 @@
     box-sizing: border-box;
 }
 
-
-
 .box .date {
     margin-left: 20px;
 }
@@ -33,8 +31,6 @@
     padding: 7px 20px;
     background-color: rgba(255, 255, 0, 0.551);
 
-
-
     border-radius: 16px;
     cursor: pointer;
 }
@@ -47,11 +43,6 @@ body {
     background-color: black;
     text-align: center;
     /* display: flex; */
-
-
-
-
-
 }
 
 p {
@@ -69,15 +60,10 @@ p {
 }
 
 footer {
-   
-
     margin-top: 2px;
     /* width: 100%; */
 
-
-
     color: white;
-
 }
 
 .date {
@@ -88,7 +74,6 @@ footer {
   display: inline-block;
   animation: vibratePulse 2.5s infinite;
   transform-origin: center; /* text center se scale hona */
-
 
 /* @keyframes vibratePulse {
   0% {
@@ -108,17 +93,14 @@ footer {
   }
 } */
 .timeline {
- 
-  min-height:85vh;   /* minimum screen height */
-  height:auto;   
+    min-height: 85vh; /* minimum screen height */
+    height: auto;
     margin-top: 150px;
 
     width: 95vw;
     margin: auto;
     position: relative;
-
 }
-
 
 @keyframes glow {
     0% {
@@ -134,13 +116,11 @@ footer {
     }
 }
 
-
 .line {
-
     position: absolute;
     width: 2px;
     height: 80%;
-   left: 50%;
+    left: 50%;
     background: #ffe9a3;
     /* filter: bright(7); */
     animation: glow 2s ease-in-out infinite;
@@ -149,34 +129,43 @@ footer {
         0 0 10px yellow,
         0 0 20px yellow,
         0 0 40px yellow;
-
 }
-
 
 .card {
     display: flex;
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 0, 0.605);
-      padding: 10px;
-      background-color: black;
+    padding: 10px;
+    background-color: black;
+   box-shadow:
+    0 4px 10px rgba(0,0,0,0.6),
+    0 0 10px rgba(212,255,0,0.15);
+
+  transition: 0.4s ease-out;
+  
 }
 
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 8px 20px rgba(0,0,0,0.7),
+    0 0 18px rgba(212,255,0,0.3);
+}
 .bottom {
     position: absolute;
-    
+
     display: flex;
     width: 42%;
     height: 30%;
     padding: 5px;
     bottom: 0;
-    transform:translateY(-5px);
+    transform: translateY(-5px);
     /* height: 100px; */
     /* aspect-ratio: 3/2; */
     align-items: center;
     justify-content: center;
-   left: 50%;
-   transform:translateX(-50%);
-  
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .first {
@@ -193,11 +182,9 @@ footer {
     /* margin: auto; */
     /* border-radius: 12px;
   border: 1px solid rgba(255, 255, 0, 0.605); */
-
 }
 
 .first-line {
-
     /* position: absolute;
   top: 175px;
   left: 16%; */
@@ -238,7 +225,7 @@ footer {
     position: absolute;
     /* border-radius: 12px; */
     top: 33%;
-   /* left:25%; */
+    /* left:25%; */
 
     display: flex;
     width: 50%;
@@ -249,13 +236,12 @@ footer {
     justify-content: flex-end;
     /* margin: auto; */
     /* border: 1px solid rgba(255, 255, 0, 0.605); */
-
 }
 
 .second-line {
     /* position: absolute; */
     /* top: 300px; */
-    
+
     border: solid white 0.5px;
     z-index: 0;
     width: 15%;
@@ -263,13 +249,12 @@ footer {
 }
 
 .card:hover {
-    background-color: rgba(255, 255, 0, 0.453)
+    background-color: rgba(255, 255, 0, 0.453);
 }
 
 .line::before {
-    content: "";
+    content: '';
     position: absolute;
-
 
     transform: translateX(-50%);
 
@@ -282,9 +267,7 @@ footer {
         0 0 40px yellow;
     background: yellow;
     z-index: 3;
-
 }
-
 
 /* @keyframes glow {
   0%   { opacity: 0.1; }
@@ -292,10 +275,10 @@ footer {
   100% { opacity: 0.3; }
 } */
 
-p >span{
-  font-family: "Montserrat", sans-serif;
-  font-optical-sizing: auto;
-  font-weight:800;
-  font-style: normal;
-  font-size: x-large;
+p > span {
+    font-family: 'Montserrat', sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+    font-size: x-large;
 }
