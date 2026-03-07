@@ -360,37 +360,40 @@ const notes_app = {
         });
         if (data.success) return data.notes[0];
     },
+fetch_note: async () => {
 
-    fetch_note: async () => {
-        startLoading();
+    startLoading();
+
+    try {
+
         const { data } = await axios.get('/notes/getNotes', {
-            params: {
-                limit,
-                page,
-            },
+            params: { limit, page }
         });
 
-        if (data.success) {
-            total_row = Number(data.count);
-            console.log('count', total_row);
+        if (!data.success) return;
 
-            if (rows_load == total_row - 3) {
-                loadmore.innerText = 'You have reached the limit ..';
-                stopLoading();
+        total_row = Number(data.count);
+
+        data.notes.forEach(item => {
+
+            if (!notesMap.has(item.id)) {
+                notesMap.set(item.id, item);
             }
-             data.notes.forEach((item) => {
-            
-                if (!notesMap.has(item.id)) {
-        notesMap.set(item.id, item);
-    }
-               
-                // console.log(notesMap.get(`note-${item.id}`));
 
-                putNote(item);
-            });
-        }
-        stopLoading();
-    },
+            putNote(item);
+
+        });
+
+    } catch (err) {
+
+        console.error("fetch error:", err);
+
+    } finally {
+
+        stopLoading();   // हमेशा चलेगा
+
+    }
+},
 
     searchNote_db : async()=>{
 
