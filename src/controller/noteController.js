@@ -9,7 +9,7 @@ export const getNotes = async (req, res) => {
 
         const result = await db.query(
             'SELECT *,COUNT(*) OVER() FROM notes  WHERE user_id =$1 ORDER BY updated_at  DESC OFFSET $2 LIMIT $1 ',
-            [userid, offset, limit]
+            [userid, 2, 2]
         );
         console.log(result);
         return res.json({

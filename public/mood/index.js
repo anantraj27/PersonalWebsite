@@ -326,7 +326,7 @@ let originalTitle = '';
     let app_state = {
      currentMode: 'create',
     };
-    let limit = 3;
+    let limit = 1;
     let page = 1;
     let total_row = 0;
     let notesCache = [];
