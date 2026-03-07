@@ -514,7 +514,7 @@ function putNote(item, isNew = false) {
               if(editorTitle.hasAttribute("data-title")){
        editorTitle.removeAttribute("data-title");
    }
-        currentEditingId = Number(item.id);
+        currentEditingId = Number(title_list.id.slice(5));
         console.log(currentEditingId)
 
         const id = Number(title_list.id.replace('note-', ''));
