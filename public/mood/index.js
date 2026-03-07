@@ -379,8 +379,11 @@ const notes_app = {
                 stopLoading();
             }
              data.notes.forEach((item) => {
-                notesCache.push(item.id);
-                notesMap.set(item.id, item);
+            
+                if (!notesMap.has(item.id)) {
+        notesMap.set(item.id, item);
+    }
+               
                 // console.log(notesMap.get(`note-${item.id}`));
 
                 putNote(item);
@@ -586,7 +589,7 @@ save.addEventListener('click', async () => {
     if (app_state.currentMode == 'create') {
         const result = await notes_app.save_note(title, text);
         if (result) {
-            notesCache.unshift(result.id);
+           
             notesMap.set(result.id, result);
 
             putNote(result, true);
