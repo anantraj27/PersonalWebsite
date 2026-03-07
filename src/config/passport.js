@@ -6,7 +6,7 @@ import env from 'dotenv'; /// library for usieng process.env.  name
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 dotenv.config();
-import  db  from './db.js';
+import { db } from './db.js';
 
 passport.use(
     'local',

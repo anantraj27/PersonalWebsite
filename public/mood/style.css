@@ -57,28 +57,23 @@ nav {
     backdrop-filter: blur(10px);
     padding: 14px 24px;
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.3);
-   
 }
-.search{
+.search {
     cursor: pointer;
 }
 
-
-.inputSearch{
-
+.inputSearch {
     padding: 10px 40px;
-   
- 
-    width: min(500px,90%);
+
+    width: min(500px, 90%);
     border-radius: 12px;
     background-color: #111;
     box-sizing: border-box;
-    text-decoration:wavy;
+    text-decoration: wavy;
     font-size: 1.2rem;
 }
 
-
-.inputContainer{
+.inputContainer {
     z-index: 1000;
 
     width: 100vw;
@@ -86,16 +81,15 @@ nav {
     gap: 10px;
     justify-content: center;
     align-items: center;
-
 }
-.inputContainer div{
+.inputContainer div {
     cursor: pointer;
 }
-input.inputSearch:focus{
-border: 1px solid white;
+input.inputSearch:focus {
+    border: 1px solid white;
 }
 
-.hidden{
+.hidden {
     display: none;
 }
 section {
@@ -109,14 +103,12 @@ section {
     color: white;
 }
 textarea {
-
     background-color: black;
     width: 100%;
-   
+
     border: none;
     height: 100%;
 
-    
     border-top: 1px solid rgba(28, 2, 2, 0.245);
     transition: margin-bottom 0.3s ease;
     /* Ensures padding and border are included in the 100% width calculation */
@@ -128,23 +120,22 @@ h1 {
 .editorTitle {
     font-size: 2rem; /* same as h1 */
     font-weight: bold;
- 
+
     width: 100%;
     padding-left: 2px;
     border: none;
 
     background-color: black;
-     margin-bottom:20px;
-   
+    margin-bottom: 20px;
 }
-.editorTitle:before{
+.editorTitle:before {
     content: attr(data-title);
     color: gray;
 }
 /* .editorTitle:focus::before{
    content: "";
 } */
-.editorText{
+.editorText {
     height: 100vh;
     margin-top: 5px;
 
@@ -153,12 +144,11 @@ h1 {
     line-height: 1.6;
     margin-bottom: 400px;
 }
-.editorTitle:focus{
+.editorTitle:focus {
     outline: none;
-
 }
 
-.editorText:focus{
+.editorText:focus {
     outline: none;
 }
 
@@ -173,7 +163,6 @@ section {
     right: 20px;
 }
 
-
 input:focus {
     border: none;
 }
@@ -186,7 +175,6 @@ textareafocus {
     border: none;
     outline: none;
 }
-
 
 .left {
     align-items: center;
@@ -218,11 +206,11 @@ button.save {
 
 .newnotes {
     cursor: pointer;
-  
+
     padding: 4px;
     border-radius: 12px;
 }
-.backArrow{
+.backArrow {
     cursor: pointer;
 }
 .extra {
@@ -234,7 +222,6 @@ button.save {
     padding: 5px;
     border-radius: 12px;
     width: 100px;
-   
 }
 .study.hover {
     background-color: rgba(172, 255, 47, 0.662);
@@ -246,7 +233,6 @@ button.save {
     padding: 5px;
     border-radius: 12px;
     width: 100px;
-    
 }
 .happy:hover {
     background-color: rgba(172, 255, 47, 0.789);
@@ -258,7 +244,6 @@ button.save {
     padding: 5px;
     width: 100px;
     border-radius: 12px;
-   
 }
 .personal:hover {
     background-color: rgba(189, 29, 189, 0.884);
@@ -270,7 +255,6 @@ button.save {
     padding: 5px;
     width: 100px;
     border-radius: 12px;
-
 }
 .idea:hover {
     background-color: rgba(61, 61, 199, 0.473);
@@ -282,7 +266,7 @@ button.save {
     padding: 5px;
     width: 100px;
     border-radius: 12px;
-  
+
     color: white;
 }
 .motivated:hover {
@@ -295,7 +279,6 @@ button.save {
     width: 100px;
     padding: 5px;
     border-radius: 12px;
-  
 }
 .normal:hover {
     background-color: rgb(108, 108, 180);
@@ -307,7 +290,6 @@ button.save {
     width: 100px;
     padding: 5px;
     border-radius: 12px;
-  
 }
 .romantic:hover {
     background-color: rgba(255, 192, 203, 0.559);
@@ -335,15 +317,14 @@ button.save {
     flex-direction: column;
     align-items: center;
 }
-@media  ( max-width: 480px) {
-  .choose1,
-  .choose2{
-    width:100%;
-    padding:6px 10px;
-    border-radius:10px;
-    font-size:0.85rem;
-  }
-    
+@media (max-width: 480px) {
+    .choose1,
+    .choose2 {
+        width: 100%;
+        padding: 6px 10px;
+        border-radius: 10px;
+        font-size: 0.85rem;
+    }
 }
 .choose2:hover,
 .choose1:hover {
@@ -398,14 +379,13 @@ button.save {
 #loadMore {
     display: block;
     margin: 25px auto;
-   
-   
+
     border: none;
     font-size: 15px;
     cursor: pointer;
     background-color: #7685c5;
     border-radius: 20px;
-     padding: 10px 22px
+    padding: 10px 22px;
 }
 #loadMore:disabled {
     opacity: 0.5;
@@ -432,10 +412,8 @@ p {
     margin-top: 0;
 }
 .title {
-
     position: relative;
     overflow: hidden;
-
 
     /* Glassmorphism effect */
     background: rgba(255, 255, 255, 0.05);
@@ -501,7 +479,7 @@ p {
     /* Mobile ke liye */
     .title {
         width: 96%;
-        padding:  14px 16px;
+        padding: 14px 16px;
     }
 }
 .meta {
@@ -530,19 +508,17 @@ p {
         transform: rotate(360deg);
     }
 }
-.title p{
-         overflow: hidden;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
-  line-clamp: 2;
+.title p {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
 }
 
-.listScreen{
-
+.listScreen {
     text-align: center;
 }
-
 
 .fonts {
     font-size: x-large;
@@ -561,53 +537,45 @@ p {
     border-radius: 50%;
     background-color: white;
 }
-.color{
-   position:absolute;
-   bottom:60px;
-   right:10px;
-   /* display:flex;
+.color {
+    position: absolute;
+    bottom: 60px;
+    right: 10px;
+    /* display:flex;
    gap:8px;
    flex-direction: column; */
 }
 
-.color button{
-   width:20px;
-   height:20px;
-   border-radius:50%;
+.color button {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
 }
-.color button[data-color="orange"]{
- background-color: rgba(255, 166, 0, 0.87);
+.color button[data-color='orange'] {
+    background-color: rgba(255, 166, 0, 0.87);
 }
-.color button[data-color="red"]{
- background-color:red;
+.color button[data-color='red'] {
+    background-color: red;
 }
-.color button[data-color="blue"]{
- background-color:blue;
+.color button[data-color='blue'] {
+    background-color: blue;
 }
-.color button[data-color="green"]{
- background-color:green;
+.color button[data-color='green'] {
+    background-color: green;
 }
-.color button[data-color="yellow"]{
- background-color: yellow;
+.color button[data-color='yellow'] {
+    background-color: yellow;
 }
-.no-category{
-
+.no-category {
     color: white;
-     padding: 5px;
+    padding: 5px;
     border-radius: 12px;
     width: 100px;
-
-    
 }
 
-.no-mood{
-    
+.no-mood {
     color: white;
-     padding: 5px;
+    padding: 5px;
     border-radius: 12px;
     width: 100px;
-   
-   
 }
-
-

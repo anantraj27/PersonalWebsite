@@ -296,7 +296,6 @@ if (choose2) {
 //
 
 //
-   
 
 /*==================================================================
  variables referencing a DOM node returned by querySelector. 👇
@@ -310,30 +309,30 @@ const save = document.querySelector('.save');
 const editorTitle = document.querySelector('.editorTitle');
 const editorText = document.querySelector('.editorText');
 const listScreen = document.querySelector('.listScreen');
-const searchList = document.querySelector(".searchTitleList");
-const inputText = document.querySelector(".inputSearch");
+const searchList = document.querySelector('.searchTitleList');
+const inputText = document.querySelector('.inputSearch');
 
-let search = document.querySelector(".search");
-let searchNav = document.querySelector(".searchNav");
-let cross = document.querySelector(".cross")
+let search = document.querySelector('.search');
+let searchNav = document.querySelector('.searchNav');
+let cross = document.querySelector('.cross');
 
 /*==================================================================
                        state of app 👇
  ==================================================================  */
 let originalTitle = '';
-    let originalText = '';
+let originalText = '';
 
-    let app_state = {
-     currentMode: 'create',
-    };
-    let limit = 3;
-    let page = 1;
-    let total_row = 0;
-    let notesCache = [];
-    let notesMap = new Map()
-    let searchNotes =[];
-    let currentEditingId = null;
-    
+let app_state = {
+    currentMode: 'create',
+};
+let limit = 3;
+let page = 1;
+let total_row = 0;
+let notesCache = [];
+let notesMap = new Map();
+let searchNotes = [];
+let currentEditingId = null;
+
 /*==================================================================
                        Map  of app 👇
  ==================================================================  */
@@ -344,8 +343,6 @@ const notes_app = {
             text: editorText.innerHTML,
             category: label1.innerHTML,
             mood: label.innerHTML,
-           
-           
         });
         if (data.success) return data.notes[0];
     },
@@ -356,7 +353,6 @@ const notes_app = {
             text: editorText.innerHTML,
             mood: label.innerHTML,
             category: label1.innerHTML,
-            
         });
         if (data.success) return data.notes[0];
     },
@@ -373,14 +369,14 @@ const notes_app = {
         if (data.success) {
             total_row = Number(data.count);
             console.log('count', total_row);
-            notesCache = data.notes;
+            
             console.log(notesCache);
 
             if (rows_load == total_row - 3) {
                 loadmore.innerText = 'You have reached the limit ..';
                 stopLoading();
             }
-            notesCache.forEach((item) => {
+            data.notes.forEach((item) => {
                 notesCache.push(item.id);
                 notesMap.set(item.id, item);
                 console.log(notesMap.get(`note-${item.id}`));
@@ -391,17 +387,11 @@ const notes_app = {
         stopLoading();
     },
 
-    searchNote_db : async()=>{
-
-        const {data} = await axios.get("/matcNotes",{
-            params:{
-
-
-
-            }
-        })
-
-    }
+    searchNote_db: async () => {
+        const { data } = await axios.get('/matcNotes', {
+            params: {},
+        });
+    },
 };
 //   .............................................................................
 
@@ -431,29 +421,25 @@ loadmore.addEventListener('click', () => {
 function innerHTML(item) {
     const rawTime = item.updated_at;
     const dateObj = new Date(rawTime);
-    const text = new DOMParser()
-   .parseFromString(item.text, "text/html")
-  .body.innerText;
+    const text = new DOMParser().parseFromString(item.text, 'text/html').body.innerText;
 
-  const title = new DOMParser()
-  .parseFromString(item.title, "text/html")
-  .body.innerText;
+    const title = new DOMParser().parseFromString(item.title, 'text/html').body.innerText;
 
-console.log(text);
+    console.log(text);
 
-console.log(text);
-    console.log("kkk",item.title.innerHTML)
+    console.log(text);
+    console.log('kkk', item.title.innerHTML);
     let category = item.category;
 
-if(!category || category.trim() === "Choose Category :"){
-    category = "No-category";
-}
-   let mood = item.mood;
+    if (!category || category.trim() === 'Choose Category :') {
+        category = 'No-category';
+    }
+    let mood = item.mood;
 
-if(!mood || mood.trim() === "Choose mood :"){
-    mood = "No-mood";
-}
-   
+    if (!mood || mood.trim() === 'Choose mood :') {
+        mood = 'No-mood';
+    }
+
     return `              
     <h2>${title}</h2>
     <p>${text}</p>
@@ -462,18 +448,17 @@ if(!mood || mood.trim() === "Choose mood :"){
 </p>
     <p class="${mood?.toLowerCase() || 'nothing'} hover" > ${mood} </p>
     <small class="note-lastEdit "> ${dateObj.toLocaleString('default', {
-            day: 'numeric',
-            month: 'short',
-            year: 'numeric',
-            hour: 'numeric',
-            minute: 'numeric',
-        })}
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+    })}
     </small>
     </div>
     
 `;
-    }
-
+}
 
 //.......................  putting items  titleLIst ................
 
@@ -496,7 +481,7 @@ function putNote(item, isNew = false) {
     title_list.classList.add('title');
 
     title_list.id = `note-${item.id}`;
-   
+
     title_list.innerHTML = innerHTML(item);
 
     if (isNew) {
@@ -506,29 +491,20 @@ function putNote(item, isNew = false) {
     }
 
     title_list.addEventListener('click', () => {
-              if(editorTitle.hasAttribute("data-title")){
-       editorTitle.removeAttribute("data-title");
-   }
+        if (editorTitle.hasAttribute('data-title')) {
+            editorTitle.removeAttribute('data-title');
+        }
         currentEditingId = Number(title_list.id.slice(5));
 
         const id = Number(title_list.id.replace('note-', ''));
         let content = notesMap.get(id);
-        console.log('edit',content.title)
-         console.log('edit',content.text)
-          const text = new DOMParser()
-   .parseFromString(content.text, "text/html")
-  .body.innerText;
-
-  const title = new DOMParser()
-  .parseFromString(content.title, "text/html")
-  .body.innerText;
 
         editorTitle.innerHTML = content.title;
         editorText.innerHTML = content.text;
 
         originalTitle = title;
         originalText = text;
-        
+
         app_state.currentMode = 'edit';
         save.disabled = true;
 
@@ -548,14 +524,14 @@ backArrow.addEventListener('click', () => {
 });
 
 newnotes.addEventListener('click', () => {
-      choose1.classList.remove('open')
-      choose2.classList.remove('open')
+    choose1.classList.remove('open');
+    choose2.classList.remove('open');
     editorTitle.innerText = '';
     editorText.innerText = '';
     app_state.currentMode = 'create';
-       if(!editorTitle.hasAttribute("data-title")){
-       editorTitle.setAttribute("data-title","New Notes");
-   }
+    if (!editorTitle.hasAttribute('data-title')) {
+        editorTitle.setAttribute('data-title', 'New Notes');
+    }
     currentEditingId = null;
     openEditor();
     save.disabled = true;
@@ -565,7 +541,8 @@ newnotes.addEventListener('click', () => {
 function checkChanges() {
     console.log('hello', originalTitle);
     const changed =
-        editorTitle.innerText.trim() !== originalTitle || editorText.innerText.trim() !== originalText;
+        editorTitle.innerText.trim() !== originalTitle ||
+        editorText.innerText.trim() !== originalText;
 
     save.disabled = !changed;
 }
@@ -624,102 +601,42 @@ function goBack() {
     document.querySelector('.editorScreen').style.display = 'none';
 }
 
+search.addEventListener('click', () => {
+    searchNav.classList.remove('hidden');
+    listScreen.classList.add('hidden');
+});
+cross.addEventListener('click', () => {
+    searchNav.classList.add('hidden');
+    listScreen.classList.remove('hidden');
+});
 
+editorTitle.addEventListener('input', () => {
+    if (editorTitle.hasAttribute('data-title')) {
+        editorTitle.removeAttribute('data-title');
+    }
+});
 
-
-search.addEventListener('click',()=>{
-
-   searchNav.classList.remove("hidden")
-   listScreen.classList.add("hidden")
-
-})
-cross.addEventListener('click',()=>{
-    searchNav.classList.add("hidden")
-    listScreen.classList.remove("hidden")
-
-})
-
-
-editorTitle.addEventListener("input",()=>{
-      if(editorTitle.hasAttribute("data-title")){
-       editorTitle.removeAttribute("data-title");
-   }
-
-    
-})
-
-const buttons = document.querySelectorAll("[data-color]");
-const editorSection = document.querySelector(".editorSection")
+const buttons = document.querySelectorAll('[data-color]');
+const editorSection = document.querySelector('.editorSection');
 
 buttons.forEach((btn) => {
-
-    btn.addEventListener("click", (e) => {
-
+    btn.addEventListener('click', (e) => {
         e.preventDefault();
 
         const color = btn.dataset.color;
 
-    
-   
-   
-        document.execCommand("styleWithCSS", false, true);
-        document.execCommand("foreColor", false, color);
-
+        document.execCommand('styleWithCSS', false, true);
+        document.execCommand('foreColor', false, color);
     });
-
 });
 
-const fonts = document.querySelector(".fonts")
-const color = document.querySelector(".color")
-fonts.addEventListener("click",(e)=>{
+const fonts = document.querySelector('.fonts');
+const color = document.querySelector('.color');
+fonts.addEventListener('click', (e) => {
+    e.preventDefault();
 
-
-   e.preventDefault()
-
-color.classList.toggle("hidden")
-    
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    color.classList.toggle('hidden');
+});
 
 //    if(!title.value){
 //      titlevalue= 'nan';

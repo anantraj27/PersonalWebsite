@@ -1,4 +1,4 @@
-import  db from '../config/db.js';
+import { db1 } from '../config/db.js';
 
 export const getNotes = async (req, res) => {
     try {
@@ -7,7 +7,7 @@ export const getNotes = async (req, res) => {
         let limit = Number(req.query.limit);
         const offset = (page - 1) * limit;
 
-        const result = await db.query(
+        const result = await db1.query(
             'SELECT *,COUNT(*) OVER() FROM notes  WHERE user_id =$1 ORDER BY updated_at  DESC OFFSET $2 LIMIT $3 ',
             [userid, offset, limit]
         );
@@ -30,13 +30,13 @@ export const editNotes = async (req, res) => {
         const title = req.body.title;
         const text = req.body.text;
         const id = req.body.id;
-          const mood = req.body.mood;
+        const mood = req.body.mood;
         const category = req.body.category;
         console.log(title);
 
-        const result = await db.query(
+        const result = await db1.query(
             'UPDATE notes SET title =$1 ,text = $2,category=$3,mood=$4, updated_at = CURRENT_TIMESTAMP WHERE id =$5  RETURNING *',
-            [title, text,category,mood, id]
+            [title, text, category, mood, id]
         );
 
         if (result) {
@@ -59,7 +59,7 @@ export const addNotes = async (req, res) => {
         const category = req.body.category;
         console.log(title);
 
-        const result = await db.query(
+        const result = await db1.query(
             'INSERT INTO notes (user_id,title,text,category,mood) VALUES ($1,$2,$3,$4,$5) RETURNING *',
             [userid, title, text, category, mood]
         );
