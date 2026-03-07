@@ -514,7 +514,16 @@ function putNote(item, isNew = false) {
               if(editorTitle.hasAttribute("data-title")){
        editorTitle.removeAttribute("data-title");
    }
-        currentEditingId = Number(title_list.id.slice(5));
+   currentEditingId = Number(item.id);
+        // currentEditingId = Number(title_list.id.slice(5));
+        /*"Closure ka matlab hai ki ek function apne paas maujood variables ko 
+        
+        'yaad' rakhta hai, bhale hi wo function (jisne usey banaya tha) khatam ho chuka ho."
+
+     Matlab jab tune putNote(item) call kiya, toh putNote ka kaam wahi khatam ho gaya,
+    lekin uske andar wala click event listener abhi bhi item ko "pocket" mein 
+    lekar ghoom raha hai. Jab bhi click hoga, wo usi "pocket" se data nikaal lega.
+        */
         console.log(currentEditingId)
 
         const id = Number(title_list.id.replace('note-', ''));
