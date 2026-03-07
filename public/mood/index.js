@@ -361,38 +361,32 @@ const notes_app = {
         if (data.success) return data.notes[0];
     },
 fetch_note: async () => {
-
     startLoading();
 
     try {
-
         const { data } = await axios.get('/notes/getNotes', {
             params: { limit, page }
         });
 
-        if (!data.success) return;
+        if (!data.success || !data.notes) return;
 
         total_row = Number(data.count);
 
+        // Loop ke andar pehle data save karo, phir UI dikhao
         data.notes.forEach(item => {
-
-            if (!notesMap.has(item.id)) {
-                notesMap.set(item.id, item);
-                console.log(item.id , notesMap.get(id))
-            }
-
+            const safeId = Number(item.id); 
+            
+            // Step 1: Map mein data dalo (State update)
+            notesMap.set(safeId, item);
+            
+            // Step 2: UI mein element dalo (View update)
             putNote(item);
-
         });
 
     } catch (err) {
-
-        console.error("fetch error:", err);
-
+        console.error("Fetch error details:", err.response?.data || err.message);
     } finally {
-
-        stopLoading();   // हमेशा चलेगा
-
+        stopLoading();
     }
 },
 
@@ -520,7 +514,7 @@ function putNote(item, isNew = false) {
               if(editorTitle.hasAttribute("data-title")){
        editorTitle.removeAttribute("data-title");
    }
-        currentEditingId = Number(title_list.id.slice(5));
+        currentEditingId = Number(item.id);
         console.log(currentEditingId)
 
         const id = Number(title_list.id.replace('note-', ''));
