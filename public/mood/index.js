@@ -326,7 +326,7 @@ let originalTitle = '';
     let app_state = {
      currentMode: 'create',
     };
-    let limit = 1;
+    let limit = 5;
     let page = 1;
     let total_row = 0;
     let notesCache = [];
@@ -520,8 +520,10 @@ function putNote(item, isNew = false) {
        editorTitle.removeAttribute("data-title");
    }
         currentEditingId = Number(title_list.id.slice(5));
+        console.log(currentEditingId)
 
         const id = Number(title_list.id.replace('note-', ''));
+        console.log(id)
         let content = notesMap.get(id);
 
    if(!content){
