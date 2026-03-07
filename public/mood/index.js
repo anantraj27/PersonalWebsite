@@ -378,6 +378,7 @@ fetch_note: async () => {
 
             if (!notesMap.has(item.id)) {
                 notesMap.set(item.id, item);
+                console.log(item.id , notesMap.get(id))
             }
 
             putNote(item);
