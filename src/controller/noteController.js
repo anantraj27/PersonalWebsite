@@ -8,7 +8,7 @@ export const getNotes = async (req, res) => {
         const offset = (page - 1) * limit;
 
         const result = await db.query(
-            'SELECT *,COUNT(*) OVER() FROM notes  WHERE user_id =$1 ORDER BY updated_at  DESC OFFSET $2 LIMIT $3 ',
+            'SELECT *,COUNT(*) OVER() FROM notes  WHERE user_id =$1 ORDER BY updated_at  DESC OFFSET $2 LIMIT $1 ',
             [userid, offset, limit]
         );
         console.log(result);

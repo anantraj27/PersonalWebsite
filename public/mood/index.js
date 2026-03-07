@@ -423,7 +423,13 @@ function stopLoading() {
     loadmore.disabled = false;
 }
 loadmore.addEventListener('click', () => {
-    rows_load = rows_load + 3;
+
+     if (page * limit >= total_row) {
+        loadmore.innerText = "No more notes";
+        loadmore.disabled = true;
+        return;
+    }
+    rows_load = rows_load + limit;
 
     page += 1;
     notes_app.fetch_note();
