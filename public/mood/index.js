@@ -293,78 +293,242 @@ if (choose2) {
 //    }
 
 // }
+//
 
-let notesCache = [];
-let notesMap = new Map();
+//
+   
+
+/*==================================================================
+ variables referencing a DOM node returned by querySelector. 👇
+                       or 
+ variable that stores the reference of a DOM element.
+ ==================================================================  */
 const backArrow = document.querySelector('.backArrow');
 const newnotes = document.querySelector('.newnotes');
 const save = document.querySelector('.save');
-let currentEditingId = null;
 
 const editorTitle = document.querySelector('.editorTitle');
 const editorText = document.querySelector('.editorText');
 const listScreen = document.querySelector('.listScreen');
+const searchList = document.querySelector(".searchTitleList");
+const inputText = document.querySelector(".inputSearch");
+
+let search = document.querySelector(".search");
+let searchNav = document.querySelector(".searchNav");
+let cross = document.querySelector(".cross")
+
+/*==================================================================
+                       state of app 👇
+ ==================================================================  */
 let originalTitle = '';
-let originalText = '';
+    let originalText = '';
 
-let app_state = {
-    currentMode: 'create',
-};
-
-///  ......................map of appp ...........................
+    let app_state = {
+     currentMode: 'create',
+    };
+    let limit = 3;
+    let page = 1;
+    let total_row = 0;
+    let notesCache = [];
+    let notesMap = new Map()
+    let searchNotes =[];
+    let currentEditingId = null;
+    
+/*==================================================================
+                       Map  of app 👇
+ ==================================================================  */
 const notes_app = {
     save_note: async (title, text) => {
         const { data } = await axios.post('/notes/add', {
-            title: title,
-            text: text,
+            title: editorTitle.innerHTML,
+            text: editorText.innerHTML,
+            category: label1.innerHTML,
+            mood: label.innerHTML,
+           
+           
         });
         if (data.success) return data.notes[0];
     },
     edit_note: async (title, text, id) => {
         const { data } = await axios.put('/notes/edit', {
             id: id,
-            title: title,
-            text: text,
+            title: editorTitle.innerHTML,
+            text: editorText.innerHTML,
+            mood: label.innerHTML,
+            category: label1.innerHTML,
+            
         });
         if (data.success) return data.notes[0];
     },
 
     fetch_note: async () => {
-        const { data } = await axios.get('/notes/getNotes');
+        startLoading();
+        const { data } = await axios.get('/notes/getNotes', {
+            params: {
+                limit,
+                page,
+            },
+        });
 
         if (data.success) {
+            total_row = Number(data.count);
+            console.log('count', total_row);
             notesCache = data.notes;
             console.log(notesCache);
-            notesMap.clear();
+
+            if (rows_load == total_row - 3) {
+                loadmore.innerText = 'You have reached the limit ..';
+                stopLoading();
+            }
             notesCache.forEach((item) => {
-                notesMap.set(`note-${item.id}`, item);
+                notesCache.push(item.id);
+                notesMap.set(item.id, item);
                 console.log(notesMap.get(`note-${item.id}`));
 
-                putNote(item.title, item.id);
+                putNote(item);
             });
         }
+        stopLoading();
     },
-};
-// .........................................................................
 
-function putNote(title, id) {
+    searchNote_db : async()=>{
+
+        const {data} = await axios.get("/matcNotes",{
+            params:{
+
+
+
+            }
+        })
+
+    }
+};
+//   .............................................................................
+
+let rows_load = 0;
+let loadmore = document.querySelector('#loadMore');
+const spinner = document.querySelector('.spinner');
+const text = document.querySelector('.text');
+
+function startLoading() {
+    spinner.style.display = 'inline-block';
+    text.innerText = 'Loading';
+    loadmore.disabled = true;
+}
+
+function stopLoading() {
+    spinner.style.display = 'none';
+    text.innerText = 'Load More';
+    loadmore.disabled = false;
+}
+loadmore.addEventListener('click', () => {
+    rows_load = rows_load + 3;
+
+    page += 1;
+    notes_app.fetch_note();
+});
+
+function innerHTML(item) {
+    const rawTime = item.updated_at;
+    const dateObj = new Date(rawTime);
+    const text = new DOMParser()
+   .parseFromString(item.text, "text/html")
+  .body.innerText;
+
+  const title = new DOMParser()
+  .parseFromString(item.title, "text/html")
+  .body.innerText;
+
+console.log(text);
+
+console.log(text);
+    console.log("kkk",item.title.innerHTML)
+    let category = item.category;
+
+if(!category || category.trim() === "Choose Category :"){
+    category = "No-category";
+}
+   let mood = item.mood;
+
+if(!mood || mood.trim() === "Choose mood :"){
+    mood = "No-mood";
+}
+   
+    return `              
+    <h2>${title}</h2>
+    <p>${text}</p>
+    <div class="meta">
+   <p class="${category?.toLowerCase() || 'nothing'} hover"> ${category}
+</p>
+    <p class="${mood?.toLowerCase() || 'nothing'} hover" > ${mood} </p>
+    <small class="note-lastEdit "> ${dateObj.toLocaleString('default', {
+            day: 'numeric',
+            month: 'short',
+            year: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+        })}
+    </small>
+    </div>
+    
+`;
+    }
+
+
+//.......................  putting items  titleLIst ................
+
+// DOM should reflect state, not become the state...
+// State = wo data jo UI ko affect karta hai aur time ke saath change ho sakta hai.
+// notes
+/*
+notesMap
+currentEditingId
+page
+limit
+originalTitle
+originalText
+app_state.currentMode
+
+*/
+
+function putNote(item, isNew = false) {
     let title_list = document.createElement('div');
     title_list.classList.add('title');
-    title_list.innerHTML = title;
-    title_list.id = `note-${id}`;
 
-    listScreen.querySelector('header').appendChild(title_list);
+    title_list.id = `note-${item.id}`;
+   
+    title_list.innerHTML = innerHTML(item);
+
+    if (isNew) {
+        listScreen.querySelector('.titleList').prepend(title_list);
+    } else {
+        listScreen.querySelector('.titleList').insertBefore(title_list, loadmore);
+    }
 
     title_list.addEventListener('click', () => {
+              if(editorTitle.hasAttribute("data-title")){
+       editorTitle.removeAttribute("data-title");
+   }
         currentEditingId = Number(title_list.id.slice(5));
 
-        let content = notesMap.get(title_list.id);
-        editorTitle.value = content.title;
-        editorText.value = content.text;
+        const id = Number(title_list.id.replace('note-', ''));
+        let content = notesMap.get(id);
+        console.log('edit',content.title)
+         console.log('edit',content.text)
+          const text = new DOMParser()
+   .parseFromString(content.text, "text/html")
+  .body.innerText;
 
-        originalTitle = content.title;
-        originalText = content.text;
+  const title = new DOMParser()
+  .parseFromString(content.title, "text/html")
+  .body.innerText;
 
+        editorTitle.innerHTML = content.title;
+        editorText.innerHTML = content.text;
+
+        originalTitle = title;
+        originalText = text;
+        
         app_state.currentMode = 'edit';
         save.disabled = true;
 
@@ -384,9 +548,14 @@ backArrow.addEventListener('click', () => {
 });
 
 newnotes.addEventListener('click', () => {
-    editorTitle.value = '';
-    editorText.value = '';
+      choose1.classList.remove('open')
+      choose2.classList.remove('open')
+    editorTitle.innerText = '';
+    editorText.innerText = '';
     app_state.currentMode = 'create';
+       if(!editorTitle.hasAttribute("data-title")){
+       editorTitle.setAttribute("data-title","New Notes");
+   }
     currentEditingId = null;
     openEditor();
     save.disabled = true;
@@ -396,7 +565,7 @@ newnotes.addEventListener('click', () => {
 function checkChanges() {
     console.log('hello', originalTitle);
     const changed =
-        editorTitle.value.trim() !== originalTitle || editorText.value.trim() !== originalText;
+        editorTitle.innerText.trim() !== originalTitle || editorText.innerText.trim() !== originalText;
 
     save.disabled = !changed;
 }
@@ -404,8 +573,8 @@ function checkChanges() {
 editorText.addEventListener('input', checkChanges);
 editorTitle.addEventListener('input', checkChanges);
 save.addEventListener('click', async () => {
-    const title = editorTitle.value.trim();
-    const text = editorText.value.trim();
+    const title = editorTitle.innerHTML.trim();
+    const text = editorText.innerHTML.trim();
     if (!title || !text) {
         alert('Please enter title and text');
         return;
@@ -414,9 +583,10 @@ save.addEventListener('click', async () => {
     if (app_state.currentMode == 'create') {
         const result = await notes_app.save_note(title, text);
         if (result) {
-            notesMap.set(`note-${result.id}`, result);
+            notesCache.unshift(result.id);
+            notesMap.set(result.id, result);
 
-            putNote(result.title, result.id);
+            putNote(result, true);
             alert('saved successfully ..🐘');
             currentEditingId = result.id;
             app_state.currentMode = 'edit';
@@ -434,9 +604,9 @@ save.addEventListener('click', async () => {
             alert('edited successfully ..🐘');
             save.disabled = true;
 
-            notesMap.set(`note-${currentEditingId}`, result);
+            notesMap.set(currentEditingId, result);
 
-            document.querySelector(`#note-${currentEditingId}`).textContent = result.title;
+            document.querySelector(`#note-${currentEditingId}`).innerHTML = innerHTML(result);
 
             originalTitle = result.title;
             originalText = result.text;
@@ -453,6 +623,103 @@ function goBack() {
     document.querySelector('.listScreen').style.display = 'block';
     document.querySelector('.editorScreen').style.display = 'none';
 }
+
+
+
+
+search.addEventListener('click',()=>{
+
+   searchNav.classList.remove("hidden")
+   listScreen.classList.add("hidden")
+
+})
+cross.addEventListener('click',()=>{
+    searchNav.classList.add("hidden")
+    listScreen.classList.remove("hidden")
+
+})
+
+
+editorTitle.addEventListener("input",()=>{
+      if(editorTitle.hasAttribute("data-title")){
+       editorTitle.removeAttribute("data-title");
+   }
+
+    
+})
+
+const buttons = document.querySelectorAll("[data-color]");
+const editorSection = document.querySelector(".editorSection")
+
+buttons.forEach((btn) => {
+
+    btn.addEventListener("click", (e) => {
+
+        e.preventDefault();
+
+        const color = btn.dataset.color;
+
+    
+   
+   
+        document.execCommand("styleWithCSS", false, true);
+        document.execCommand("foreColor", false, color);
+
+    });
+
+});
+
+const fonts = document.querySelector(".fonts")
+const color = document.querySelector(".color")
+fonts.addEventListener("click",(e)=>{
+
+
+   e.preventDefault()
+
+color.classList.toggle("hidden")
+    
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //    if(!title.value){
 //      titlevalue= 'nan';

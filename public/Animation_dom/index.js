@@ -1,5 +1,3 @@
-import add_data from '../mood';
-
 let footer = document.querySelector('footer');
 footer.style.left = window.innerWidth / 2 + 'px';
 let audio = false;
@@ -27,7 +25,7 @@ function setTime() {
         hour: 'numeric',
         minute: 'numeric',
     });
-    document.querySelector('.date').innerHTML = date;
+    document.querySelector('.date').textContent = date;
 }
 
 setInterval(setTime, 1000);

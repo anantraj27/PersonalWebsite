@@ -16,6 +16,7 @@
 
 .box .date {
     margin-left: 20px;
+    padding: 7px;
 }
 
 .box {
@@ -64,10 +65,6 @@ footer {
     /* width: 100%; */
 
     color: white;
-}
-
-.date {
-    padding: 7px;
 }
 
 /* /* .vibrate {
@@ -137,19 +134,18 @@ footer {
     border: 1px solid rgba(255, 255, 0, 0.605);
     padding: 10px;
     background-color: black;
-   box-shadow:
-    0 4px 10px rgba(0,0,0,0.6),
-    0 0 10px rgba(212,255,0,0.15);
+    box-shadow:
+        0 4px 10px rgba(0, 0, 0, 0.6),
+        0 0 10px rgba(212, 255, 0, 0.15);
 
-  transition: 0.4s ease-out;
-  
+    transition: 0.4s ease-out;
 }
 
 .card:hover {
-  transform: translateY(-6px);
-  box-shadow:
-    0 8px 20px rgba(0,0,0,0.7),
-    0 0 18px rgba(212,255,0,0.3);
+    transform: translateY(-6px);
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.7),
+        0 0 18px rgba(212, 255, 0, 0.3);
 }
 .bottom {
     position: absolute;

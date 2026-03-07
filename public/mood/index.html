@@ -21,26 +21,38 @@ Retrieved 2026-02-25, License - CC BY-SA 4.0
     <body>
         <div id="heart-layer"></div>
 
+        <nav class="original">
+            <div class="left">
+                <div class="threeLine">≡</div>
+                <div class="notepad">Notepad</div>
+            </div>
+            <div class="right">
+                <div class="newnotes">➕</div>
+                <div class="search">🔍</div>
+                <div class="threeDot">⋮</div>
+            </div>
+        </nav>
+        <nav class="searchNav hidden">
+            <div class="inputContainer">
+                <input class="inputSearch" name="search" placeholder="🔍 Search Notes .." />
+                <div class="cross">❌</div>
+            </div>
+        </nav>
         <!-- LIST SCREEEEN   .........       -->
+        <div class="searchTitleList hidden"></div>
         <div class="listScreen">
-            <nav>
-                <div class="left">
-                    <div class="threeLine">≡</div>
-                    <div class="notepad">Notepad</div>
-                </div>
-                <div class="right">
-                    <div class="newnotes">➕</div>
-                    <div class="search">🔍</div>
-                    <div class="threeDot">⋮</div>
-                </div>
-            </nav>
-            <header class="titleList"></header>
+            <div class="titleList">
+                <button id="loadMore">
+                    <span class="text">Load More</span>
+                    <span class="spinner"></span>
+                </button>
+            </div>
         </div>
 
         <!-- Editor Screen ........... -->
 
         <div class="editorScreen" style="display: none">
-            <nav>
+            <nav class="original">
                 <div class="left">
                     <div class="backArrow">⬅️</div>
                     <div class="notepad">Notepad</div>
@@ -52,9 +64,9 @@ Retrieved 2026-02-25, License - CC BY-SA 4.0
             </nav>
             <section class="editorSection">
                 <header>
-                    <input placeholder="Enter title" type="text" class="editorTitle" />
+                    <div contenteditable="true" class="editorTitle" data-title="New Notes"> </div>
                 </header>
-                <hr />
+               
                 <div class="extra">
                     <div class="choose1">
                         <span class="label1">Choose Category :</span>
@@ -77,9 +89,23 @@ Retrieved 2026-02-25, License - CC BY-SA 4.0
                         </div>
                     </div>
                 </div>
-                <div class="fonts">🖌️</div>
+                <div class="fonts">
+                    🖌️
 
-                <textarea placeholder="Write notes ✏️.." class="editorText"> </textarea>
+                    <div class="color hidden">
+                        <button data-color="white"></button>
+                        <button data-color="orange"></button>
+                        <button data-color="red"></button>
+                        <button data-color="green"></button>
+                        <button data-color="blue"></button>
+                        <button data-color="yellow"></button>
+                    </div>
+                    <div class="headings">
+
+                    </div>
+                </div>
+
+                <div contenteditable="true" data-text="enter text ✏️...." class="editorText"> </div>
             </section>
         </div>
     </body>

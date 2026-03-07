@@ -5,10 +5,10 @@ import pageRoutes from './pageRoutes.js';
 
 const router = express.Router();
 
-router.use('/auth', authRoutes);//“Mount authRoutes at the path /auth.”
+router.use('/auth', authRoutes); //“Mount authRoutes at the path /auth.”
 
 router.use('/notes', notesRoutes);
-router.use( '/',pageRoutes);
+router.use('/', pageRoutes);
 
 export default router;
 //Or more clearly:
