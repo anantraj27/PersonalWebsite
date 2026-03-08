@@ -472,7 +472,7 @@ if(!mood || mood.trim() === "Choose mood :"){
     </small>
     </div>             
  
-    <p>${text}</p>
+    <p class ="text">${text}</p>
     <div class="meta">
    <p class="${category?.toLowerCase() || 'nothing'} hover"> ${category}
 </p>

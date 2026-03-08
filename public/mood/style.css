@@ -449,6 +449,12 @@ p {
     display: flex;
     flex-direction: column;
 }
+.title .text{
+    font-size: 1rem;
+line-height: 1.5;
+opacity: 0.85;
+
+}
 
 /* Accent line on hover */
 .title::before {
