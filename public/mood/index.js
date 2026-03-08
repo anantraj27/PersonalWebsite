@@ -459,14 +459,10 @@ if(!mood || mood.trim() === "Choose mood :"){
     mood = "No-mood";
 }
    
-    return `              
-    <h2>${title}</h2>
-    <p>${text}</p>
-    <div class="meta">
-   <p class="${category?.toLowerCase() || 'nothing'} hover"> ${category}
-</p>
-    <p class="${mood?.toLowerCase() || 'nothing'} hover" > ${mood} </p>
-    <small class="note-lastEdit "> ${dateObj.toLocaleString('default', {
+    return ` 
+    <div class="meta-top"> 
+       <h2>${title}</h2>
+       <small class="note-lastEdit "> ${dateObj.toLocaleString('default', {
             day: 'numeric',
             month: 'short',
             year: 'numeric',
@@ -474,6 +470,14 @@ if(!mood || mood.trim() === "Choose mood :"){
             minute: 'numeric',
         })}
     </small>
+    </div>             
+ 
+    <p>${text}</p>
+    <div class="meta">
+   <p class="${category?.toLowerCase() || 'nothing'} hover"> ${category}
+</p>
+    <p class="${mood?.toLowerCase() || 'nothing'} hover" > ${mood} </p>
+ 
     </div>
     
 `;

@@ -39,6 +39,10 @@ if (isadding) {
     }, 120);
 }
 
+
+
+
+
 function spanAnimation() {
     console.log('hello');
 

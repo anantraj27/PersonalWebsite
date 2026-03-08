@@ -363,10 +363,8 @@ button.save {
 }
 .titleList {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    
+
     top: 80px; /* space for navbar */
     left: 0;
     right: 0;
@@ -447,6 +445,9 @@ p {
 
     /* Text color */
     color: #e0e0e0;
+
+    display: flex;
+    flex-direction: column;
 }
 
 /* Accent line on hover */
@@ -483,11 +484,14 @@ p {
     }
 }
 .meta {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr;
-    row-gap: 6px;
-    column-gap: 5px;
+    display: flex;
+    justify-content: flex-start;
+    gap:5px;
     font-size: 14px;
+}
+.meta-top {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .spinner {
