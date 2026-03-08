@@ -491,7 +491,7 @@ p {
 }
 .meta-top {
   display: flex;
-  justify-content: flex-end;
+  justify-content:space-between;
 }
 
 .spinner {
