@@ -473,6 +473,11 @@ opacity: 0.85;
 .title:hover::before {
     opacity: 1;
 }
+.card-title{
+    font-size:  1.5rem;
+font-weight: 600;
+
+}
 
 .title:hover {
     background: rgba(255, 255, 255, 0.08);
@@ -483,7 +488,11 @@ opacity: 0.85;
         0 12px 40px rgba(0, 0, 0, 0.4);
 }
 @media (max-width: 480px) {
+
     /* Mobile ke liye */
+      html {
+    font-size: 14px;
+  }
     .title {
         width: 96%;
         padding: 14px 16px;
@@ -590,4 +599,6 @@ opacity: 0.85;
     border-radius: 12px;
     width: 100px;
         background-color: rgb(129, 118, 118);
+    font-size: 0.8rem;
+font-weight: 500;
 }

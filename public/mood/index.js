@@ -461,7 +461,7 @@ if(!mood || mood.trim() === "Choose mood :"){
    
     return ` 
     <div class="meta-top"> 
-       <h2>${title}</h2>
+       <h2 classs="card-title">${title}</h2>
        <small class="note-lastEdit "> ${dateObj.toLocaleString('default', {
             day: 'numeric',
             month: 'short',
