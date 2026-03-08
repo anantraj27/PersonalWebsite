@@ -520,9 +520,9 @@ p {
     line-clamp: 2;
 }
 
-.listScreen {
+/* .listScreen {
     text-align: center;
-}
+} */
 
 .fonts {
     font-size: x-large;
@@ -575,6 +575,7 @@ p {
     padding: 5px;
     border-radius: 12px;
     width: 100px;
+    background-color: rgb(129, 118, 118);
 }
 
 .no-mood {
@@ -582,4 +583,5 @@ p {
     padding: 5px;
     border-radius: 12px;
     width: 100px;
+        background-color: rgb(129, 118, 118);
 }
