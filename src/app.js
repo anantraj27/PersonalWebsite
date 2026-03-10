@@ -19,7 +19,7 @@ const app = express();
 /* ------------------ BASIC MIDDLEWARE ------------------ */
 app.use(
   cors({
-    origin: "https://personalwebsite-livid-ten.vercel.app",
+    origin: "https://personal-website-two-inky-99.vercel.app",
     credentials: true
   })
 );
