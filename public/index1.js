@@ -84,7 +84,7 @@ let Password = document.getElementById('Passsword');
 
 console.log(name);
 console.log(Password);
-let submission = document.querySelector('form');
+let submission = document.querySelector('.signup');
 
 submission.addEventListener('submit', async function (event) {
     if (!passwordValidation || !nameValidation || !emailValidation) {
@@ -120,8 +120,8 @@ submission.addEventListener('submit', async function (event) {
 
 const sign_in = document.querySelector(".signin");
 
-const sign_email = document.querySelector(".signin_Email");
-const sign_password = document.querySelector(".signin_Password");
+const sign_email = document.querySelector(".sign_Email");
+const sign_password = document.querySelector(".sign_Password");
 
 sign_in.addEventListener("submit", async (e) => {
 
@@ -147,13 +147,9 @@ sign_in.addEventListener("submit", async (e) => {
   );
 
   if(data.success){
-
      window.location.href="/Animation_dom/index.html";
-
   }else{
-
      alert(data.message);
-
   }
 
  } catch(err){
