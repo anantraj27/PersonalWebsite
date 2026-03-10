@@ -1,12 +1,14 @@
-console.log("signin script loaded");
+alert('page link ho rha hai ')
 
-const sign_in = document.querySelector("form.signin");
+const form = document.getElementById("signinForm");
 
 if(!sign_in){
   console.error("Signin form not found");
 }
 
 sign_in.addEventListener("submit", async (e) => {
+
+    alert("click bhi ho rha hai ")
 
  e.preventDefault();
  console.log("submit triggered");
