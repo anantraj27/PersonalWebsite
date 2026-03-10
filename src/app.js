@@ -42,7 +42,7 @@ await redisClient.connect();
 const redisStore = new RedisStore({
   client: redisClient
 });
-
+app.set("trust proxy", 1);
 app.use(
   session({
     store: redisStore,
@@ -54,7 +54,7 @@ app.use(
   httpOnly: true,
   secure: true,
   sameSite: "none",
-    proxy: true,
+   
 }
   })
 );
