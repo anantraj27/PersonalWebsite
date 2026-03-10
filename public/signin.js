@@ -17,14 +17,19 @@ sign_in.addEventListener("submit", async (e) => {
 
  try {
 
-  const { data } = await axios.post(
-    `${API}/auth/signin`,
-    {
-      Email: emailValue,
-      password: passwordValue
-    },
-    { withCredentials:true }
-  );
+const { data } = await axios.post(
+  `${API}/auth/signin`,
+  {
+    Email: emailValue,
+    password: passwordValue
+  },
+  {
+    withCredentials: true,
+    headers: {
+      "Content-Type": "application/json"
+    }
+  }
+);
 
   if(data.success){
      window.location.href="/Animation_dom/index.html";
