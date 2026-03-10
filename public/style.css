@@ -42,7 +42,29 @@ body {
     padding: 10px;
 }
 
+.sign_Email{
+      width: 350px;
+    background-position: calc(100% - 3px) center;
+    background-color: black;
+    background-repeat: no-repeat;
+    background-size: contain;
+    border-color: white;
+    border-radius: 12px;
+    padding: 10px;
+}
+
 .userPassword {
+    width: 350px;
+    background-image: url('password.svg');
+    background-position: calc(100% - 3px) center;
+    background-color: black;
+    background-repeat: no-repeat;
+    background-size: 1.5rem;
+    border-color: white;
+    border-radius: 12px;
+    padding: 10px;
+}
+.sign_Password{
     width: 350px;
     background-image: url('password.svg');
     background-position: calc(100% - 3px) center;

@@ -2,7 +2,7 @@ import express from 'express';
 import session from 'express-session';
 import passport from 'passport';
 import dotenv from 'dotenv';
-import RedisStore from "connect-redis";
+import { RedisStore } from "connect-redis";
 import routes from './routes/index.js';
 import './config/passport.js'; // only imports strategies
 import { createClient } from "redis";
@@ -19,7 +19,7 @@ const app = express();
 /* ------------------ BASIC MIDDLEWARE ------------------ */
 app.use(
   cors({
-    origin: "https://personalwebsite-livid-ten.vercel.app/",
+    origin: "https://personalwebsite-livid-ten.vercel.app",
     credentials: true
   })
 );

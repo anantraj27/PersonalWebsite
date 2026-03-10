@@ -296,7 +296,6 @@ if (choose2) {
 //
 
 //
-   
 
 /*==================================================================
  variables referencing a DOM node returned by querySelector. 👇
@@ -310,97 +309,107 @@ const save = document.querySelector('.save');
 const editorTitle = document.querySelector('.editorTitle');
 const editorText = document.querySelector('.editorText');
 const listScreen = document.querySelector('.listScreen');
-const searchList = document.querySelector(".searchTitleList");
-const inputText = document.querySelector(".inputSearch");
+const searchList = document.querySelector('.searchTitleList');
+const inputText = document.querySelector('.inputSearch');
 
-let search = document.querySelector(".search");
-let searchNav = document.querySelector(".searchNav");
-let cross = document.querySelector(".cross")
+let search = document.querySelector('.search');
+let searchNav = document.querySelector('.searchNav');
+let cross = document.querySelector('.cross');
 
 /*==================================================================
                        state of app 👇
  ==================================================================  */
 let originalTitle = '';
-    let originalText = '';
+let originalText = '';
 
-    let app_state = {
-     currentMode: 'create',
-    };
-    let limit = 5;
-    let page = 1;
-    let total_row = 0;
-    let notesCache = [];
-    let notesMap = new Map()
-    let searchNotes =[];
-    let currentEditingId = null;
-    
+let app_state = {
+    currentMode: 'create',
+};
+let limit = 5;
+let page = 1;
+let total_row = 0;
+let notesCache = [];
+let notesMap = new Map();
+let searchNotes = [];
+let currentEditingId = null;
+
 /*==================================================================
                        Map  of app 👇
  ==================================================================  */
+
+const API = 'https://personalwebsite-1-9nzz.onrender.com';
 const notes_app = {
     save_note: async (title, text) => {
-        const { data } = await axios.post('/notes/add', {
-            title: editorTitle.innerHTML,
-            text: editorText.innerHTML,
-            category: label1.innerHTML,
-            mood: label.innerHTML,
-           
-           
-        });
+        const { data } = await axios.post(
+            `${API}/notes/add`,
+            {
+                title: editorTitle.innerHTML,
+                text: editorText.innerHTML,
+                category: label1.innerHTML,
+                mood: label.innerHTML,
+            },
+            {
+                withCredentials: true,
+            }
+        );
         if (data.success) return data.notes[0];
     },
     edit_note: async (title, text, id) => {
-        const { data } = await axios.put('/notes/edit', {
-            id: id,
-            title: editorTitle.innerHTML,
-            text: editorText.innerHTML,
-            mood: label.innerHTML,
-            category: label1.innerHTML,
-            
-        });
+        const { data } = await axios.put(
+            `${API}/notes/edit`,
+            {
+                id: id,
+                title: editorTitle.innerHTML,
+                text: editorText.innerHTML,
+                mood: label.innerHTML,
+                category: label1.innerHTML,
+            },
+            {
+                withCredentials: true,
+            }
+        );
         if (data.success) return data.notes[0];
     },
-fetch_note: async () => {
-    startLoading();
+    fetch_note: async () => {
+        startLoading();
 
-    try {
-        const { data } = await axios.get('/notes/getNotes', {
-            params: { limit, page }
+        try {
+            const { data } = await axios.get(
+                `${API}/notes/getNotes`,
+                {
+                    params: { limit, page },
+                
+                
+                    withCredentials: true,
+                }
+            );
+
+            if (!data.success || !data.notes) return;
+
+            total_row = Number(data.count);
+
+            // Loop ke andar pehle data save karo, phir UI dikhao
+            data.notes.forEach((item) => {
+                const safeId = Number(item.id);
+
+                // Step 1: Map mein data dalo (State update)
+                notesMap.set(safeId, item);
+
+                // Step 2: UI mein element dalo (View update)
+                putNote(item);
+            });
+        } catch (err) {
+            console.error('Fetch error details:', err.response?.data || err.message);
+        } finally {
+            stopLoading();
+        }
+    },
+
+    searchNote_db: async () => {
+        const { data } = await axios.get('/matcNotes', {
+            params: {},
         });
-
-        if (!data.success || !data.notes) return;
-
-        total_row = Number(data.count);
-
-        // Loop ke andar pehle data save karo, phir UI dikhao
-        data.notes.forEach(item => {
-            const safeId = Number(item.id); 
-            
-            // Step 1: Map mein data dalo (State update)
-            notesMap.set(safeId, item);
-            
-            // Step 2: UI mein element dalo (View update)
-            putNote(item);
-        });
-
-    } catch (err) {
-        console.error("Fetch error details:", err.response?.data || err.message);
-    } finally {
-        stopLoading();
-    }
-},
-
-    searchNote_db : async()=>{
-
-        const {data} = await axios.get("/matcNotes",{
-            params:{
-
-
-
-            }
-        })
-
-    }
+    },
 };
 //   .............................................................................
 
@@ -421,9 +430,8 @@ function stopLoading() {
     loadmore.disabled = false;
 }
 loadmore.addEventListener('click', () => {
-
-     if (page * limit >= total_row) {
-        loadmore.innerText = "No more notes";
+    if (page * limit >= total_row) {
+        loadmore.innerText = 'No more notes';
         loadmore.disabled = true;
         return;
     }
@@ -436,39 +444,35 @@ loadmore.addEventListener('click', () => {
 function innerHTML(item) {
     const rawTime = item.updated_at;
     const dateObj = new Date(rawTime);
-    const text = new DOMParser()
-   .parseFromString(item.text, "text/html")
-  .body.innerText;
+    const text = new DOMParser().parseFromString(item.text, 'text/html').body.innerText;
 
-  const title = new DOMParser()
-  .parseFromString(item.title, "text/html")
-  .body.innerText;
+    const title = new DOMParser().parseFromString(item.title, 'text/html').body.innerText;
 
-console.log(text);
+    console.log(text);
 
-console.log(text);
- 
+    console.log(text);
+
     let category = item.category;
 
-if(!category || category.trim() === "Choose Category :"){
-    category = "No-category";
-}
-   let mood = item.mood;
+    if (!category || category.trim() === 'Choose Category :') {
+        category = 'No-category';
+    }
+    let mood = item.mood;
 
-if(!mood || mood.trim() === "Choose mood :"){
-    mood = "No-mood";
-}
-   
+    if (!mood || mood.trim() === 'Choose mood :') {
+        mood = 'No-mood';
+    }
+
     return ` 
     <div class="meta-top"> 
        <h2 classs="card-title">${title}</h2>
        <small class="note-lastEdit"> ${dateObj.toLocaleString('default', {
-            day: 'numeric',
-            month: 'short',
-            year: 'numeric',
-            hour: 'numeric',
-            minute: 'numeric',
-        })}
+           day: 'numeric',
+           month: 'short',
+           year: 'numeric',
+           hour: 'numeric',
+           minute: 'numeric',
+       })}
     </small>
     </div>             
  
@@ -481,8 +485,7 @@ if(!mood || mood.trim() === "Choose mood :"){
     </div>
     
 `;
-    }
-
+}
 
 //.......................  putting items  titleLIst ................
 
@@ -505,7 +508,7 @@ function putNote(item, isNew = false) {
     title_list.classList.add('title');
 
     title_list.id = `note-${item.id}`;
-   
+
     title_list.innerHTML = innerHTML(item);
 
     if (isNew) {
@@ -515,10 +518,10 @@ function putNote(item, isNew = false) {
     }
 
     title_list.addEventListener('click', () => {
-              if(editorTitle.hasAttribute("data-title")){
-       editorTitle.removeAttribute("data-title");
-   }
-   currentEditingId = Number(item.id);
+        if (editorTitle.hasAttribute('data-title')) {
+            editorTitle.removeAttribute('data-title');
+        }
+        currentEditingId = Number(item.id);
         // currentEditingId = Number(title_list.id.slice(5));
         /*"Closure ka matlab hai ki ek function apne paas maujood variables ko 
         
@@ -528,32 +531,30 @@ function putNote(item, isNew = false) {
     lekin uske andar wala click event listener abhi bhi item ko "pocket" mein 
     lekar ghoom raha hai. Jab bhi click hoga, wo usi "pocket" se data nikaal lega.
         */
-        console.log(currentEditingId)
+        console.log(currentEditingId);
 
         const id = Number(title_list.id.replace('note-', ''));
-        console.log(id)
+        console.log(id);
         let content = notesMap.get(id);
 
-   if(!content){
-      console.error("Map miss for id:", id);
-       return;
-     }
-        console.log('edit',content.title)
-         console.log('edit',content.text)
-     const text = new DOMParser()
-.parseFromString(content.text || "", "text/html")
-.body.innerText;
+        if (!content) {
+            console.error('Map miss for id:', id);
+            return;
+        }
+        console.log('edit', content.title);
+        console.log('edit', content.text);
+        const text = new DOMParser().parseFromString(content.text || '', 'text/html').body
+            .innerText;
 
-  const title = new DOMParser()
-  .parseFromString(content.title || "", "text/html")
-  .body.innerText;
+        const title = new DOMParser().parseFromString(content.title || '', 'text/html').body
+            .innerText;
 
         editorTitle.innerHTML = content.title;
         editorText.innerHTML = content.text;
 
         originalTitle = title;
         originalText = text;
-        
+
         app_state.currentMode = 'edit';
         save.disabled = true;
 
@@ -573,14 +574,14 @@ backArrow.addEventListener('click', () => {
 });
 
 newnotes.addEventListener('click', () => {
-      choose1.classList.remove('open')
-      choose2.classList.remove('open')
+    choose1.classList.remove('open');
+    choose2.classList.remove('open');
     editorTitle.innerText = '';
     editorText.innerText = '';
     app_state.currentMode = 'create';
-       if(!editorTitle.hasAttribute("data-title")){
-       editorTitle.setAttribute("data-title","New Notes");
-   }
+    if (!editorTitle.hasAttribute('data-title')) {
+        editorTitle.setAttribute('data-title', 'New Notes');
+    }
     currentEditingId = null;
     openEditor();
     save.disabled = true;
@@ -590,7 +591,8 @@ newnotes.addEventListener('click', () => {
 function checkChanges() {
     console.log('hello', originalTitle);
     const changed =
-        editorTitle.innerText.trim() !== originalTitle || editorText.innerText.trim() !== originalText;
+        editorTitle.innerText.trim() !== originalTitle ||
+        editorText.innerText.trim() !== originalText;
 
     save.disabled = !changed;
 }
@@ -608,7 +610,6 @@ save.addEventListener('click', async () => {
     if (app_state.currentMode == 'create') {
         const result = await notes_app.save_note(title, text);
         if (result) {
-           
             notesMap.set(result.id, result);
 
             putNote(result, true);
@@ -649,102 +650,42 @@ function goBack() {
     document.querySelector('.editorScreen').style.display = 'none';
 }
 
+search.addEventListener('click', () => {
+    searchNav.classList.remove('hidden');
+    listScreen.classList.add('hidden');
+});
+cross.addEventListener('click', () => {
+    searchNav.classList.add('hidden');
+    listScreen.classList.remove('hidden');
+});
 
+editorTitle.addEventListener('input', () => {
+    if (editorTitle.hasAttribute('data-title')) {
+        editorTitle.removeAttribute('data-title');
+    }
+});
 
-
-search.addEventListener('click',()=>{
-
-   searchNav.classList.remove("hidden")
-   listScreen.classList.add("hidden")
-
-})
-cross.addEventListener('click',()=>{
-    searchNav.classList.add("hidden")
-    listScreen.classList.remove("hidden")
-
-})
-
-
-editorTitle.addEventListener("input",()=>{
-      if(editorTitle.hasAttribute("data-title")){
-       editorTitle.removeAttribute("data-title");
-   }
-
-    
-})
-
-const buttons = document.querySelectorAll("[data-color]");
-const editorSection = document.querySelector(".editorSection")
+const buttons = document.querySelectorAll('[data-color]');
+const editorSection = document.querySelector('.editorSection');
 
 buttons.forEach((btn) => {
-
-    btn.addEventListener("click", (e) => {
-
+    btn.addEventListener('click', (e) => {
         e.preventDefault();
 
         const color = btn.dataset.color;
 
-    
-   
-   
-        document.execCommand("styleWithCSS", false, true);
-        document.execCommand("foreColor", false, color);
-
+        document.execCommand('styleWithCSS', false, true);
+        document.execCommand('foreColor', false, color);
     });
-
 });
 
-const fonts = document.querySelector(".fonts")
-const color = document.querySelector(".color")
-fonts.addEventListener("click",(e)=>{
+const fonts = document.querySelector('.fonts');
+const color = document.querySelector('.color');
+fonts.addEventListener('click', (e) => {
+    e.preventDefault();
 
-
-   e.preventDefault()
-
-color.classList.toggle("hidden")
-    
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    color.classList.toggle('hidden');
+});
 
 //    if(!title.value){
 //      titlevalue= 'nan';
