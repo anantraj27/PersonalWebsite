@@ -2,31 +2,61 @@ import express from 'express';
 import session from 'express-session';
 import passport from 'passport';
 import dotenv from 'dotenv';
-
+import RedisStore from "connect-redis";
 import routes from './routes/index.js';
 import './config/passport.js'; // only imports strategies
+import { createClient } from "redis";
+import cors from "cors";
+
+
+
+
 
 dotenv.config();
 
 const app = express();
 
 /* ------------------ BASIC MIDDLEWARE ------------------ */
+app.use(
+  cors({
+    origin: "https://your-frontend.vercel.app",
+    credentials: true
+  })
+);
 
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 /* ------------------ SESSION ------------------ */
+const redisClient = createClient({
+  url: process.env.REDIS_URL
+});
+
+redisClient.on("error", (err) => {
+  console.error("Redis error:", err);
+});
+
+await redisClient.connect();
+
+const redisStore = new RedisStore({
+  client: redisClient
+});
 
 app.use(
-    session({
-        secret: process.env.SESSION_SECRET,
-        resave: false,
-        saveUninitialized: false,
-        cookie: {
-            maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
-        },
-    })
+  session({
+    store: redisStore,
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+  maxAge: 1000 * 60 * 60 * 24 * 7,
+  httpOnly: true,
+  secure: true,
+  sameSite: "none",
+    proxy: true,
+}
+  })
 );
 
 /* ------------------ PASSPORT ------------------ */
