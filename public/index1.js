@@ -3,6 +3,8 @@
 const username = document.querySelector('.username');
 const nameMessage = document.querySelector('#nameMessage');
 let nameValidation = false;
+if(username){
+
 username.addEventListener('blur', function () {
     const name = username.value.trim();
     const nameRegularExpression = /^([A-Za-z\s]+)*$/;
@@ -18,6 +20,8 @@ username.addEventListener('blur', function () {
         nameValidation = true;
     }
 });
+}
+
 //    username.addEventListener("blur", function () {
 //   if (!nameValidation) {
 //     // username.value = "";
