@@ -12,7 +12,7 @@ import { authenticateUser } from '../middleware/authMiddleware.js';
 
 const router = express.Router();
 
-router.get('/', homePage);
+router.get('/',authenticateUser, secretPage);
 router.get('/signin', signinPage);
 router.get('/signup', signupPage);
 router.get('/secret', authenticateUser, secretPage);

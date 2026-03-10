@@ -1,6 +1,6 @@
 export const authenticateUser = (req, res, next) => {
     if (!req.isAuthenticated()) {
-        return res.redirect('/signin');
+        return res.redirect('/');
     }
     next();
 };
