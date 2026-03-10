@@ -1,5 +1,5 @@
 
-const API = "https://personalwebsite-1-9nzz.onrender.com";
+const API = "/api";
 const form = document.getElementById("signinForm");
 
 if(!form){
@@ -22,7 +22,7 @@ form.addEventListener("submit", async (e) => {
   }
 
 
-  
+
   try {
 
     const { data } = await axios.post(

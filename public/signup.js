@@ -76,7 +76,7 @@ userPasword.addEventListener('blur', function () {
         passwordMessage.innerHTML = '';
     }
 });
-const API = "https://personalwebsite-1-9nzz.onrender.com";
+const API = "/api";
 //  validating the submision ....
 let name = document.getElementById('name');
 let email = document.getElementById('email');

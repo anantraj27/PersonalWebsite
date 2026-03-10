@@ -337,7 +337,7 @@ let currentEditingId = null;
                        Map  of app 👇
  ==================================================================  */
 
-const API = 'https://personalwebsite-1-9nzz.onrender.com';
+const API = "/api";
 const notes_app = {
     save_note: async (title, text) => {
         const { data } = await axios.post(
