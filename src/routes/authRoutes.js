@@ -20,41 +20,45 @@ router.get(
         failureRedirect: '/signin',
     })
 );
-router.post('/signin', (req, res, next) => {
+// router.post('/signin', (req, res, next) => {
 
-  passport.authenticate('local', (err, user, info) => {
+//   passport.authenticate('local', (err, user, info) => {
 
-    if (err) {
-      return res.status(500).json({
-        success:false,
-        message:"Server error"
-      });
-    }
+//     if (err) {
+//       return res.status(500).json({
+//         success:false,
+//         message:"Server error"
+//       });
+//     }
 
-    if (!user) {
-      return res.status(401).json({
-        success:false,
-        message: info.message || "Invalid credentials"
-      });
-    }
+//     if (!user) {
+//       return res.status(401).json({
+//         success:false,
+//         message: info.message || "Invalid credentials"
+//       });
+//     }
 
-    req.logIn(user, (err) => {
+//     req.logIn(user, (err) => {
 
-      if (err) {
-        return res.status(500).json({
-          success:false,
-          message:"Login failed"
-        });
-      }
+//       if (err) {
+//         return res.status(500).json({
+//           success:false,
+//           message:"Login failed"
+//         });
+//       }
 
-      return res.json({
-        success:true,
-        message:"Login successful"
-      });
+//       return res.json({
+//         success:true,
+//         message:"Login successful"
+//       });
 
-    });
+//     });
 
-  })(req, res, next);
+//   })(req, res, next);
 
+// });
+router.post('/signin', (req, res) => {
+    console.log("Body aaya:", req.body);
+    res.json({ message: "Data received", data: req.body });
 });
 export default router;
