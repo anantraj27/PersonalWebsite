@@ -29,3 +29,28 @@ function setTime() {
 }
 
 setInterval(setTime, 1000);
+
+
+const API = "https://personalwebsite-1-9nzz.onrender.com";
+
+async function verify_page(){
+
+ try{
+
+  const { data } = await axios.get(`${API}/secret`,{
+    withCredentials:true
+  });
+
+  if(!data.success){
+     window.location.href="/signin.html";
+  }
+
+ }catch(err){
+
+   window.location.href="/signin.html";
+
+ }
+
+}
+
+window.onload = verify_page;

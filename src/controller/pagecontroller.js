@@ -9,15 +9,24 @@ export const homePage = (req, res) => {
 };
 
 export const signinPage = (req, res) => {
-    res.sendFile(path.join(__dirname, '../../public/signin.html'));
+     res.json({
+      success:true,
+      message:"Secret data"
+   });
 };
 
 export const signupPage = (req, res) => {
-    res.sendFile(path.join(__dirname, '../../public/signup.html'));
+     res.json({
+      success:true,
+      message:"Secret data"
+   });
 };
 
 export const secretPage = (req, res) => {
-    res.sendFile(path.join(__dirname, '../../public/Animation_dom/index.html'));
+     res.json({
+      success:true,
+      message:"Secret data"
+   });
 };
 
 export const adminPage = (req, res) => {

@@ -20,11 +20,41 @@ router.get(
         failureRedirect: '/signin',
     })
 );
-router.post(
-    '/signin',
-    passport.authenticate('local', {
-        failureRedirect: '/signin',
-        successRedirect: '/secret',
-    })
-);
+router.post('/signin', (req, res, next) => {
+
+  passport.authenticate('local', (err, user, info) => {
+
+    if (err) {
+      return res.status(500).json({
+        success:false,
+        message:"Server error"
+      });
+    }
+
+    if (!user) {
+      return res.status(401).json({
+        success:false,
+        message: info.message || "Invalid credentials"
+      });
+    }
+
+    req.logIn(user, (err) => {
+
+      if (err) {
+        return res.status(500).json({
+          success:false,
+          message:"Login failed"
+        });
+      }
+
+      return res.json({
+        success:true,
+        message:"Login successful"
+      });
+
+    });
+
+  })(req, res, next);
+
+});
 export default router;

@@ -76,7 +76,7 @@ userPasword.addEventListener('blur', function () {
         passwordMessage.innerHTML = '';
     }
 });
-
+const API = "https://personalwebsite-1-9nzz.onrender.com";
 //  validating the submision ....
 let name = document.getElementById('name');
 let email = document.getElementById('email');
@@ -95,19 +95,75 @@ submission.addEventListener('submit', async function (event) {
 
     event.preventDefault();
     try {
-        const { data } = await axios.post('/auth/signup', {
-            Name: name.value,
-            Email: email.value,
-            password: Password.value,
-        });
+        const { data } = await axios.post(
+            `${API}/auth/signup`,
+            {
+                Name: name.value,
+                Email: email.value,
+                password: Password.value,
+            },
+            {
+                withCredentials: true,
+            }
+        );
 
         if (data.success) {
             alert(data.message);
-            location.href = '/signin';
+             window.location.href = "/signin.html";
         } else {
             alert(data.message);
         }
     } catch (err) {
         alert(` Status : ${err.response.status} ${err.response.data.message}`);
     }
+});
+
+const sign_in = document.querySelector(".signin");
+
+const sign_email = document.querySelector(".signin_Email");
+const sign_password = document.querySelector(".signin_Password");
+
+sign_in.addEventListener("submit", async (e) => {
+
+ e.preventDefault();
+
+ const emailValue = sign_email.value.trim();
+ const passwordValue = sign_password.value.trim();
+
+ if (!emailValue || !passwordValue) {
+    alert("Please fill all fields");
+    return;
+ }
+
+ try {
+
+  const { data } = await axios.post(
+    `${API}/auth/signin`,
+    {
+      Email: emailValue,
+      password: passwordValue
+    },
+    { withCredentials:true }
+  );
+
+  if(data.success){
+
+     window.location.href="/Animation_dom/index.html";
+
+  }else{
+
+     alert(data.message);
+
+  }
+
+ } catch(err){
+
+   if(err.response){
+      alert(err.response.data.message);
+   }else{
+      alert("Server error");
+   }
+
+ }
+
 });

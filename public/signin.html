@@ -14,7 +14,7 @@
     <style></style>
 
     <body>
-        <form action="/auth/signin" target="_blank" method="POST" class="">
+        <form  target="_blank" method="POST" class="signin">
             <!-- <label >Enter your name :</label>
         <br>
         <input class="user username" type="text" name="Name" required> 
@@ -22,11 +22,11 @@
     -->
 
             <label>email address</label> <br />
-            <input class="user userEmail" type="text" name="Email" id="email" required />
+            <input class="sign_Email" type="text" name="Email" id="email" required />
             <p id="emailMessage"></p>
 
             <label>Enter your password :</label> <br />
-            <input class="user userPassword" type="text" name="password" id="Passsword" required />
+            <input class="sign_Password" type="text" name="password" id="Passsword" required />
             <p id="passwordMessage"></p>
 
             <!-- <input type="submit" id="submit" value="sign in " >  -->
@@ -43,5 +43,6 @@
         <form method="get" action="/auth/google" style="margin: 0">
             <button class="google" type="submit">Continue with Google</button>
         </form>
+         <script src="./index1.js"></script>
     </body>
 </html>

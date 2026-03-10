@@ -8,7 +8,7 @@ export const getNotes = async (req, res) => {
       const limit = Number(req.query.limit);
 
       const offset = (page - 1) * limit;
-
+    
       const result = await db.query(
          `SELECT *, COUNT(*) OVER() AS count
           FROM notes

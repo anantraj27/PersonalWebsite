@@ -19,12 +19,12 @@ const app = express();
 /* ------------------ BASIC MIDDLEWARE ------------------ */
 app.use(
   cors({
-    origin: "https://your-frontend.vercel.app",
+    origin: "https://personalwebsite-livid-ten.vercel.app/",
     credentials: true
   })
 );
 
-app.use(express.static('public'));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
