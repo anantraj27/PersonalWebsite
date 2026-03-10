@@ -1,14 +1,18 @@
-const sign_in = document.querySelector(".signin");
+console.log("signin script loaded");
 
-const sign_email = document.querySelector(".sign_Email");
-const sign_password = document.querySelector(".sign_Password");
+const sign_in = document.querySelector("form.signin");
+
+if(!sign_in){
+  console.error("Signin form not found");
+}
 
 sign_in.addEventListener("submit", async (e) => {
 
  e.preventDefault();
+ console.log("submit triggered");
 
- const emailValue = sign_email.value.trim();
- const passwordValue = sign_password.value.trim();
+ const emailValue = document.querySelector(".sign_Email").value.trim();
+ const passwordValue = document.querySelector(".sign_Password").value.trim();
 
  if (!emailValue || !passwordValue) {
     alert("Please fill all fields");
@@ -17,19 +21,21 @@ sign_in.addEventListener("submit", async (e) => {
 
  try {
 
-const { data } = await axios.post(
-  `${API}/auth/signin`,
-  {
-    Email: emailValue,
-    password: passwordValue
-  },
-  {
-    withCredentials: true,
-    headers: {
-      "Content-Type": "application/json"
+  const { data } = await axios.post(
+    `${API}/auth/signin`,
+    {
+      Email: emailValue,
+      password: passwordValue
+    },
+    {
+      withCredentials: true,
+      headers: {
+        "Content-Type": "application/json"
+      }
     }
-  }
-);
+  );
+
+  console.log("server response:", data);
 
   if(data.success){
      window.location.href="/Animation_dom/index.html";
@@ -38,6 +44,8 @@ const { data } = await axios.post(
   }
 
  } catch(err){
+
+   console.error(err);
 
    if(err.response){
       alert(err.response.data.message);
@@ -48,5 +56,3 @@ const { data } = await axios.post(
  }
 
 });
-
-
