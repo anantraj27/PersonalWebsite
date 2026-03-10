@@ -37,7 +37,7 @@ const emailRegex =
 const userEmail = document.querySelector('.userEmail');
 const emailMessage = document.querySelector('#emailMessage');
 let emailValidation = false;
-
+if(userEmail){
 userEmail.addEventListener('blur', function () {
     if (userEmail.value) {
         const email = userEmail.value.trim();
@@ -56,6 +56,8 @@ userEmail.addEventListener('blur', function () {
         emailMessage.innerHTML = '';
     }
 });
+}
+
 
 /*                   Password validation                                                               */
 
@@ -63,6 +65,7 @@ const passworRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&*])[a-zA-Z0-
 const userPasword = document.querySelector('.userPassword');
 const passwordMessage = document.querySelector('#passwordMessage');
 let passwordValidation = false;
+if(userPasword){
 userPasword.addEventListener('blur', function () {
     if (userPasword.value) {
         const password = userPasword.value.trim();
@@ -80,6 +83,8 @@ userPasword.addEventListener('blur', function () {
         passwordMessage.innerHTML = '';
     }
 });
+}
+
 const API = "https://personalwebsite-1-9nzz.onrender.com";
 //  validating the submision ....
 let name = document.getElementById('name');
