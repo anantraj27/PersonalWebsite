@@ -31,26 +31,26 @@ function setTime() {
 setInterval(setTime, 1000);
 
 
-const API = "https://personalwebsite-1-9nzz.onrender.com";
+// const API = "https://personalwebsite-1-9nzz.onrender.com";
 
-async function verify_page(){
+// async function verify_page(){
 
- try{
+//  try{
 
-  const { data } = await axios.get(`${API}/secret`,{
-    withCredentials:true
-  });
+//   const { data } = await axios.get(`${API}/secret`,{
+//     withCredentials:true
+//   });
 
-  if(!data.success){
-     window.location.href="/signin.html";
-  }
+//   if(!data.success){
+//      window.location.href="/signin.html";
+//   }
 
- }catch(err){
+//  }catch(err){
 
-   window.location.href="/signin.html";
+//    window.location.href="/signin.html";
 
- }
+//  }
 
-}
+// }
 
-window.onload = verify_page;
+// window.onload = verify_page;

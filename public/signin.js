@@ -8,7 +8,7 @@ if(!form){
 
 form.addEventListener("submit", async (e) => {
 
-  alert("click bhi ho rha hai ");
+
 
   e.preventDefault();
   console.log("submit triggered");
