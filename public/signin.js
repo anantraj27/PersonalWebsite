@@ -1,5 +1,5 @@
-alert('page link ho rha hai ')
 
+const API = "https://personalwebsite-1-9nzz.onrender.com";
 const form = document.getElementById("signinForm");
 
 if(!form){
