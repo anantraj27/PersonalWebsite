@@ -75,3 +75,17 @@ function spanAnimation() {
 
     // i--;
 }
+const signin = document.querySelector(".signin")
+
+signin.addEventListener('click',()=>{
+
+  window.location.href='signin.html'
+
+})
+const signup = document.querySelector(".signup")
+
+signup.addEventListener('click',()=>{
+
+  window.location.href='signup.html'
+
+})
